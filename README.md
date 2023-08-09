@@ -4,21 +4,21 @@ Frontend repo for the traveler app
 ## Setup
 Run the following commands:
 
-npm install
+- npm install
 
 ## Running app
 To run the application run one of the following command based on your platform:
 
-npm run web
-npm run ios
-npm run android
+- npm run web
+- npm run ios
+- npm run android
 
 ## Running storybook
 To run the storybook web server run the following command
 
-npm run storybook
+- npm run storybook
 
 ## Branching rules
 Please branch using the following convention
 
-git checkout -b 'feature/INFRA-123:Feature_description'
+- git checkout -b 'feature/INFRA-123:Feature_description'
