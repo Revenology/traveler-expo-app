@@ -25,4 +25,8 @@ To run the storybook web server run the following command
 ## Branching rules
 Please branch using the following convention
 
+Features
 - git checkout -b 'feature/INFRA-123:Feature_description'
+
+Bugfixes
+- git checkout -b 'bugfix/INFRA-123:Bugfix_description'
