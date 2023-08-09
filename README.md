@@ -13,6 +13,10 @@ To run the application run one of the following command based on your platform:
 - npm run ios
 - npm run android
 
+Note that you will need to have a mac if you are running expo on your iphone due Xcode being required to build ios apps.
+- [Android App](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en&gl=US)
+- [IOS App](https://apps.apple.com/us/app/expo-go/id982107779)
+
 ## Running storybook
 To run the storybook web server run the following command
 
