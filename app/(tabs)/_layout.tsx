@@ -23,9 +23,9 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
       }}>
       <Tabs.Screen
-        name="index"
+        name="landing/index"
         options={{
-          title: 'Tab One',
+          title: 'landing',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
@@ -44,9 +44,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="signup/index"
         options={{
-          title: 'Tab Two',
+          title: 'signup',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
