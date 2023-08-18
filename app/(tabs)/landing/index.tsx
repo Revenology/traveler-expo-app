@@ -4,9 +4,12 @@ import { Text, View } from '@/components/Themed';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import logo from '../../../assets/images/logo.png';
 import React from 'react';
-import { StyledComponentWrapper, StyledImage, StyledLine, StyledWrapper, Title } from './index.styles';
+import { StyledComponentWrapper, StyledImage, StyledLine, StyledWrapper, Title } from './index.style';
+import { useRouter } from 'expo-router';
 
 const landing = () => {
+  const router = useRouter();
+
     return (
         <StyledWrapper>
           <StyledComponentWrapper>
@@ -14,8 +17,8 @@ const landing = () => {
             <Image source={logo} style={styles.image}/>
           </StyledComponentWrapper>
           <StyledComponentWrapper>
-             <Button color={'green'} title='Login' onPress={()=> {console.log('This is a login button')}}/>
-              <Button title='Signup' onPress={()=> {console.log('This is a signup button')}}/>
+             <Button color={'green'} title='Login' onPress={()=> {router.push('/(tabs)/login/')}}/>
+              <Button title='Signup' onPress={()=> {router.push('/(tabs)/signup/')}}/>
           </StyledComponentWrapper>
         </StyledWrapper>
       );
