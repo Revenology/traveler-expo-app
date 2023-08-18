@@ -15,8 +15,8 @@ export const StyledComponentWrapper = styled(View)`
 `;
 
 export const Title = styled(Text)`
-    fontsize: 20;
-    fontweight: bold;
+    font-size: 20;
+    font-weight: bold;
 `;
 
 export const StyledLine = styled(View)`
@@ -26,8 +26,8 @@ export const StyledLine = styled(View)`
     width: 80px;
 `;
 export const StyledImage = styled(View)`
-    align-items: center;
-    justify-content: center;
+    alignitems: center;
+    justifycontent: center;
     width: 50;
     height: 50;
     resizemode: stretch;
