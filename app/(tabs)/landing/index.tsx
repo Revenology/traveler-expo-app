@@ -1,37 +1,47 @@
-import { Button, Image, StyleSheet } from 'react-native';
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Image, StyleSheet } from 'react-native';
 import logo from '../../../assets/images/logo.png';
 import React from 'react';
-import { StyledComponentWrapper, StyledImage, StyledLine, StyledWrapper, Title } from './index.style';
+import { StyledComponentWrapper, StyledWrapper, Title } from './index.style';
 import { useRouter } from 'expo-router';
+import Button from '@/components/common/button/Button';
 
 const landing = () => {
-  const router = useRouter();
+	const router = useRouter();
 
-    return (
-        <StyledWrapper>
-          <StyledComponentWrapper>
-            <Title>Traveler</Title>
-            <Image source={logo} style={styles.image}/>
-          </StyledComponentWrapper>
-          <StyledComponentWrapper>
-             <Button color={'green'} title='Login' onPress={()=> {router.push('/(tabs)/login/')}}/>
-              <Button title='Signup' onPress={()=> {router.push('/(tabs)/signup/')}}/>
-          </StyledComponentWrapper>
-        </StyledWrapper>
-      );
+	return (
+		<StyledWrapper>
+			<StyledComponentWrapper>
+				<Title>Traveler</Title>
+				<Image source={logo} style={styles.image} />
+			</StyledComponentWrapper>
+			<StyledComponentWrapper>
+				<Button
+					variant="primary"
+					title="Login"
+					onPress={() => {
+						router.push('/(tabs)/login/');
+					}}
+				/>
+				<Button
+					variant="secondary"
+					title="Signup"
+					onPress={() => {
+						router.push('/(tabs)/signup/');
+					}}
+				/>
+			</StyledComponentWrapper>
+		</StyledWrapper>
+	);
 };
 
 const styles = StyleSheet.create({
-    image: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: 50,
-      height: 50,
-      resizeMode: 'stretch'
-    }
-  });
+	image: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: 50,
+		height: 50,
+		resizeMode: 'stretch',
+	},
+});
 
 export default landing;

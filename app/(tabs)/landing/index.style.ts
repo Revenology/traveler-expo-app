@@ -12,6 +12,8 @@ export const StyledComponentWrapper = styled(View)`
     flex: 1;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+    width: 100%;
 `;
 
 export const Title = styled(Text)`
