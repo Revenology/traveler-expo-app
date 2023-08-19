@@ -5,7 +5,7 @@ export interface UserDataProps {
     dob: Date;
     email: string;
     password: string;
-    phone: number;
+    phone: number | null;
 }
 
 export interface AccountProps extends UserDataProps {
