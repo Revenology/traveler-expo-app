@@ -1,7 +1,9 @@
 import { Text, View } from '@/components/Themed';
+import { KeyboardAvoidingView } from 'react-native';
 import { styled } from 'styled-components/native';
 
-export const StyledWrapper = styled(View)`
+export const StyledWrapper = styled(KeyboardAvoidingView)`
+    width: 100%;
     height: 100%;
     flex: 1;
     align-items: center;
