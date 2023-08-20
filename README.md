@@ -14,6 +14,9 @@ To run the application run one of the following command based on your platform:
 
 -   npm run
 
+Or if you are using Yarn
+-   Yarn run
+
 Scan QR code
 
 -   [Android App](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en&gl=US)
@@ -36,3 +39,7 @@ Features
 Bugfixes
 
 -   git checkout -b 'bugfix/INFRA-123:Bugfix_description'
+
+Testing
+
+- git checkout -b 'test/Test_name'
