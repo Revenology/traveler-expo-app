@@ -7,11 +7,16 @@ export interface ButtonProps {
 	onPress: (event: GestureResponderEvent) => void;
 	title: string;
 	variant: 'primary' | 'secondary';
+	disabled?: boolean;
 }
 
-const Button = ({ onPress, title, variant }: ButtonProps) => {
+const Button = ({ onPress, title, variant, disabled }: ButtonProps) => {
 	return (
-		<StyledTouchableOpacity variant={variant} onPress={onPress}>
+		<StyledTouchableOpacity
+			variant={variant}
+			onPress={onPress}
+			disabled={disabled}
+		>
 			<Text>{title}</Text>
 		</StyledTouchableOpacity>
 	);
