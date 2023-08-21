@@ -95,6 +95,19 @@ const Signup = () => {
 						}
 					/>
 				</InputWrapper>
+				<InputWrapper>
+					<TextInput
+						value={userData.password}
+						secureTextEntry
+						placeholder="password"
+						onChange={(text) =>
+							setUserData((prev) => ({
+								...prev,
+								password: text.nativeEvent.text,
+							}))
+						}
+					/>
+				</InputWrapper>
 				<Button onPress={showDatepicker} title="DOB" variant={'primary'} />
 				{show && (
 					<DateTimePicker
