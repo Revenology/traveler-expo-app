@@ -6,14 +6,14 @@ import {
 	StyledComponentWrapper,
 	StyledWrapper,
 	Title,
-} from './index.style';
+} from './Index.style';
 import { UserDataProps } from '@/constants/types';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Button from '@/components/common/button/Button';
 import { Text } from '@/components/Themed';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const signup = () => {
+const Signup = () => {
 	const [userData, setUserData] = useState<UserDataProps>({
 		username: '',
 		firstName: '',
@@ -40,10 +40,6 @@ const signup = () => {
 
 	const showDatepicker = () => {
 		showMode('date');
-	};
-
-	const showTimepicker = () => {
-		showMode('time');
 	};
 
 	return (
@@ -115,9 +111,8 @@ const signup = () => {
 					variant={'primary'}
 				/>
 			</StyledComponentWrapper>
-			{/* <StyledComponentWrapper></StyledComponentWrapper> */}
 		</StyledWrapper>
 	);
 };
 
-export default signup;
+export default Signup;

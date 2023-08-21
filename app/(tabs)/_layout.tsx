@@ -29,7 +29,7 @@ export default function TabLayout() {
 			}}
 		>
 			<Tabs.Screen
-				name="landing/index"
+				name="landing/Index"
 				options={{
 					title: 'Landing',
 					tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
@@ -50,14 +50,14 @@ export default function TabLayout() {
 				}}
 			/>
 			<Tabs.Screen
-				name="signup/index"
+				name="signup/Index"
 				options={{
 					title: 'Signup',
 					tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
 				}}
 			/>
 			<Tabs.Screen
-				name="login/index"
+				name="login/Index"
 				options={{
 					title: 'Login',
 					tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,

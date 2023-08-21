@@ -1,11 +1,11 @@
 import { Image, StyleSheet } from 'react-native';
 import logo from '../../../assets/images/logo.png';
 import React from 'react';
-import { StyledComponentWrapper, StyledWrapper, Title } from './index.style';
+import { StyledComponentWrapper, StyledWrapper, Title } from './Index.style';
 import { useRouter } from 'expo-router';
 import Button from '@/components/common/button/Button';
 
-const landing = () => {
+const Landing = () => {
 	const router = useRouter();
 
 	return (
@@ -19,14 +19,14 @@ const landing = () => {
 					variant="primary"
 					title="Login"
 					onPress={() => {
-						router.push('/(tabs)/login/');
+						router.push('/(tabs)/login/Index');
 					}}
 				/>
 				<Button
 					variant="secondary"
 					title="Signup"
 					onPress={() => {
-						router.push('/(tabs)/signup/');
+						router.push('/(tabs)/signup/Index');
 					}}
 				/>
 			</StyledComponentWrapper>
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default landing;
+export default Landing;
