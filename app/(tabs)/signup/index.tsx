@@ -12,6 +12,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Button from '@/components/common/button/Button';
 import { Text } from '@/components/Themed';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {
+	validateEmail,
+	validatePassword,
+	validateUsername,
+} from '@/utils/util';
 
 const Signup = () => {
 	const [userData, setUserData] = useState<UserDataProps>({
@@ -40,6 +45,13 @@ const Signup = () => {
 
 	const showDatepicker = () => {
 		showMode('date');
+	};
+
+	// TODO: Implement checkFields
+	const checkFields = async () => {
+		await validateUsername(userData.username);
+		validatePassword(userData.password);
+		validateEmail(userData.email);
 	};
 
 	return (
@@ -92,6 +104,19 @@ const Signup = () => {
 						placeholder="phone"
 						onChange={(text) =>
 							setUserData((prev) => ({ ...prev, phone: Number(text) }))
+						}
+					/>
+				</InputWrapper>
+				<InputWrapper>
+					<TextInput
+						value={userData.password}
+						secureTextEntry
+						placeholder="password"
+						onChange={(text) =>
+							setUserData((prev) => ({
+								...prev,
+								password: text.nativeEvent.text,
+							}))
 						}
 					/>
 				</InputWrapper>
