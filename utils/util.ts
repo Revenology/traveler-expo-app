@@ -25,7 +25,7 @@ export const validateUsername = async (
 		validationResponse.valid = true;
 	}
 
-	return validationResponse;
+	return await validationResponse;
 };
 
 export const validatePassword = (password: string): ValidationResponse => {
