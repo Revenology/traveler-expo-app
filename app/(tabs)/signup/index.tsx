@@ -29,7 +29,16 @@ const Signup = () => {
 		password: '',
 		phone: null,
 	});
-	const [date, setDate] = useState(new Date(1598051730000));
+	const [errorData, setErrorData] = useState({
+		username: false,
+		firstName: false,
+		lastName: false,
+		dob: false,
+		email: false,
+		password: false,
+		phone: null,
+	});
+	const [date, setDate] = useState(new Date('1990-01-01'));
 	const [mode, setMode] = useState('date');
 	const [show, setShow] = useState(false);
 
@@ -66,8 +75,9 @@ const Signup = () => {
 				</InputWrapper>
 				<Input
 					label="Username"
+					placeholder="username"
 					value={userData.username}
-					error={true}
+					error={false}
 					errorMessage="This username is already taken"
 					onChangeText={(text) =>
 						setUserData((prev) => ({ ...prev, username: text }))
@@ -75,6 +85,7 @@ const Signup = () => {
 				/>
 				<Input
 					label="First name"
+					placeholder="Indiana"
 					value={userData.firstName}
 					onChangeText={(text) =>
 						setUserData((prev) => ({ ...prev, firstName: text }))
@@ -82,6 +93,7 @@ const Signup = () => {
 				/>
 				<Input
 					label="Last name"
+					placeholder="Traveler"
 					value={userData.lastName}
 					onChangeText={(text) =>
 						setUserData((prev) => ({ ...prev, lastName: text }))
@@ -89,6 +101,9 @@ const Signup = () => {
 				/>
 				<Input
 					label="Email"
+					placeholder="email@email.com"
+					error={userData.email.length != 0 && !validateEmail(userData.email)}
+					errorMessage="Please input a valid email."
 					value={userData.email}
 					onChangeText={(text) =>
 						setUserData((prev) => ({ ...prev, email: text }))
@@ -97,6 +112,7 @@ const Signup = () => {
 
 				<Input
 					label="Phone"
+					placeholder="+61 ...."
 					value={userData.phone}
 					onChange={(text) =>
 						setUserData((prev) => ({ ...prev, phone: Number(text) }))
@@ -104,9 +120,9 @@ const Signup = () => {
 				/>
 				<Input
 					label="Password"
+					placeholder="Password"
 					value={userData.password}
 					secureTextEntry
-					placeholder="password"
 					onChange={(text) =>
 						setUserData((prev) => ({
 							...prev,
