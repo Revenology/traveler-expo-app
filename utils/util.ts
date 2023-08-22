@@ -56,20 +56,14 @@ export const validatePassword = (password: string): ValidationResponse => {
 	return validationResponse;
 };
 
-export const validateEmail = (email: string): ValidationResponse => {
-	const validationResponse: ValidationResponse = {
-		valid: false,
-		response: [],
-	};
-
+export const validateEmail = (email: string): boolean => {
 	const emailRegex =
 		/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-	if (emailRegex.test(email)) {
-		validationResponse.valid = true;
-	} else {
-		validationResponse.response.push('Please enter a valid email');
-	}
+	console.log(emailRegex.test(email));
 
-	return validationResponse;
+	if (emailRegex.test(email)) {
+		return true;
+	}
+	return false;
 };
