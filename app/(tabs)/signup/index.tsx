@@ -17,6 +17,7 @@ import {
 	validatePassword,
 	validateUsername,
 } from '@/utils/util';
+import Input from '@/components/common/textinput/Input';
 
 const Signup = () => {
 	const [userData, setUserData] = useState<UserDataProps>({
@@ -57,79 +58,71 @@ const Signup = () => {
 	return (
 		<StyledWrapper behavior="padding">
 			<StyledComponentWrapper>
-				<TouchableOpacity>
+				{/* <TouchableOpacity>
 					<Image source={defaultImage} />
-				</TouchableOpacity>
-				<Title>{userData.username}</Title>
+				</TouchableOpacity> */}
 				<InputWrapper>
-					<TextInput
-						value={userData.username}
-						placeholder="username"
-						onChangeText={(text) =>
-							setUserData((prev) => ({ ...prev, username: text }))
-						}
-					/>
+					<Title>Welcome</Title>
 				</InputWrapper>
+				<Input
+					label="Username"
+					value={userData.username}
+					error={true}
+					errorMessage="This username is already taken"
+					onChangeText={(text) =>
+						setUserData((prev) => ({ ...prev, username: text }))
+					}
+				/>
+				<Input
+					label="First name"
+					value={userData.firstName}
+					onChangeText={(text) =>
+						setUserData((prev) => ({ ...prev, firstName: text }))
+					}
+				/>
+				<Input
+					label="Last name"
+					value={userData.lastName}
+					onChangeText={(text) =>
+						setUserData((prev) => ({ ...prev, lastName: text }))
+					}
+				/>
+				<Input
+					label="Email"
+					value={userData.email}
+					onChangeText={(text) =>
+						setUserData((prev) => ({ ...prev, email: text }))
+					}
+				/>
+
+				<Input
+					label="Phone"
+					value={userData.phone}
+					onChange={(text) =>
+						setUserData((prev) => ({ ...prev, phone: Number(text) }))
+					}
+				/>
+				<Input
+					label="Password"
+					value={userData.password}
+					secureTextEntry
+					placeholder="password"
+					onChange={(text) =>
+						setUserData((prev) => ({
+							...prev,
+							password: text.nativeEvent.text,
+						}))
+					}
+				/>
 				<InputWrapper>
-					<TextInput
-						value={userData.firstName}
-						placeholder="John"
-						onChangeText={(text) =>
-							setUserData((prev) => ({ ...prev, firstName: text }))
-						}
-					/>
-				</InputWrapper>
-				<InputWrapper>
-					<TextInput
-						value={userData.lastName}
-						placeholder="Smith"
-						onChangeText={(text) =>
-							setUserData((prev) => ({ ...prev, lastName: text }))
-						}
-					/>
-				</InputWrapper>
-				<InputWrapper>
-					<TextInput
-						value={userData.email}
-						placeholder="email"
-						onChangeText={(text) =>
-							setUserData((prev) => ({ ...prev, email: text }))
-						}
-					/>
-				</InputWrapper>
-				<InputWrapper>
-					<TextInput
-						value={userData.phone?.toString()}
-						dataDetectorTypes={'phoneNumber'}
-						placeholder="phone"
-						onChange={(text) =>
-							setUserData((prev) => ({ ...prev, phone: Number(text) }))
-						}
-					/>
-				</InputWrapper>
-				<InputWrapper>
-					<TextInput
-						value={userData.password}
-						secureTextEntry
-						placeholder="password"
-						onChange={(text) =>
-							setUserData((prev) => ({
-								...prev,
-								password: text.nativeEvent.text,
-							}))
-						}
-					/>
-				</InputWrapper>
-				<Button onPress={showDatepicker} title="DOB" variant={'primary'} />
-				{show && (
+					<Text>Date of Birth</Text>
 					<DateTimePicker
 						testID="dateTimePicker"
 						value={date}
-						// mode={mode}
 						is24Hour={true}
 						onChange={onChange}
 					/>
-				)}
+				</InputWrapper>
 				<Button
 					onPress={() => console.log(userData)}
 					title={'Signup'}
