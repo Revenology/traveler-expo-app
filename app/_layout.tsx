@@ -24,11 +24,6 @@ export const unstable_settings = {
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-if (process.env.NOD_ENV === 'development') {
-	const { worker } = require('./mocks/browser');
-	worker.start();
-}
-
 const DismissKeyboard = ({ children }: any) => (
 	<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
 		{children}
