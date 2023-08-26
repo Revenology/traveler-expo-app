@@ -24,7 +24,7 @@ const Landing = () => {
 				/>
 				<Button
 					variant="secondary"
-					title="Signup"
+					title="Sign up"
 					onPress={() => {
 						router.push('/(tabs)/signup/Index');
 					}}

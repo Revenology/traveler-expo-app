@@ -17,7 +17,7 @@ const Button = ({ onPress, title, variant, disabled }: ButtonProps) => {
 			onPress={onPress}
 			disabled={disabled}
 		>
-			<Text>{title}</Text>
+			<Text style={{ color: 'white', fontWeight: 600 }}>{title}</Text>
 		</StyledTouchableOpacity>
 	);
 };
