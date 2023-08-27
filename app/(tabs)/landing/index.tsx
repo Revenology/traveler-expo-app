@@ -1,9 +1,20 @@
-import { Image, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import logo from '../../../assets/images/logo.png';
+import tile from '../../../assets/blush/landing.png';
 import React from 'react';
-import { StyledComponentWrapper, StyledWrapper, Title } from './Index.style';
-import { useRouter } from 'expo-router';
+import {
+	Image,
+	ImageContainer,
+	ImageMain,
+	StyledComponentWrapper,
+	StyledWrapper,
+	Title,
+} from './Index.style';
+import { Link, useRouter } from 'expo-router';
 import Button from '@/components/common/button/Button';
+import { Text } from '@/components/Themed';
+import { FontAwesome } from '@expo/vector-icons';
+import Colors from '@/constants/Colors';
 
 const Landing = () => {
 	const router = useRouter();
@@ -11,15 +22,20 @@ const Landing = () => {
 	return (
 		<StyledWrapper>
 			<StyledComponentWrapper>
+				<ImageContainer>
+					<ImageMain source={tile} />
+				</ImageContainer>
 				<Title>Traveler</Title>
-				<Image source={logo} style={styles.image} />
+				<Text style={{ color: 'gray', margin: '0%', padding: '0%' }}>
+					Plan your travels, together!
+				</Text>
 			</StyledComponentWrapper>
 			<StyledComponentWrapper>
 				<Button
 					variant="primary"
 					title="Login"
 					onPress={() => {
-						router.push('/(tabs)/login/Index');
+						router.push('/login/Index');
 					}}
 				/>
 				<Button
@@ -33,15 +49,5 @@ const Landing = () => {
 		</StyledWrapper>
 	);
 };
-
-const styles = StyleSheet.create({
-	image: {
-		alignItems: 'center',
-		justifyContent: 'center',
-		width: 50,
-		height: 50,
-		resizeMode: 'stretch',
-	},
-});
 
 export default Landing;

@@ -26,7 +26,6 @@ const Input = ({
 }: InputProps) => {
 	return (
 		<>
-			<StyledLabel>{label}</StyledLabel>
 			<StyledWrapper>
 				<TextInput
 					secureTextEntry={secureTextEntry}

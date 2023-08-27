@@ -6,9 +6,10 @@ export const StyledWrapper = styled(View)`
 	padding-left: 10px;
 	justify-content: center;
 	border-radius: 5px;
-	width: 50%;
-	height: 30px;
-	border: 1px solid black;
+	width: 75%;
+	background-color: #f6f6f6;
+	height: 50px;
+	border: 1px solid #e9e9e9;
 `;
 
 export const StyledError = styled(Text)`

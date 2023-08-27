@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Image, SafeAreaView, TextInput } from 'react-native';
-import defaultImage from '../../../assets/images/defaultProfile.png';
+import signup from '../../../assets/blush/signup.png';
 import {
+	AssistText,
+	ComponentWrapper,
 	InputWrapper,
 	StyledComponentWrapper,
 	StyledWrapper,
-	Title,
 } from './Index.style';
 import { UserDataProps } from '@/constants/types';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -18,6 +19,9 @@ import {
 	validateUsername,
 } from '@/utils/util';
 import Input from '@/components/common/textinput/Input';
+import { PageWrapper } from '@/components/common/PageWrapper';
+import HeroImage from '@/components/common/HeroImage/HeroImage';
+import { Title } from '@/components/common/Title';
 
 const Signup = () => {
 	const [userData, setUserData] = useState<UserDataProps>({
@@ -66,85 +70,51 @@ const Signup = () => {
 
 	return (
 		<StyledWrapper behavior="padding">
-			<StyledComponentWrapper>
-				{/* <TouchableOpacity>
-					<Image source={defaultImage} />
-				</TouchableOpacity> */}
-				<InputWrapper>
-					<Title>Welcome</Title>
-				</InputWrapper>
-				<Input
-					label="Username"
-					placeholder="username"
-					value={userData.username}
-					error={false}
-					errorMessage="This username is already taken"
-					onChangeText={(text) =>
-						setUserData((prev) => ({ ...prev, username: text }))
-					}
-				/>
-				<Input
-					label="First name"
-					placeholder="Indiana"
-					value={userData.firstName}
-					onChangeText={(text) =>
-						setUserData((prev) => ({ ...prev, firstName: text }))
-					}
-				/>
-				<Input
-					label="Last name"
-					placeholder="Traveler"
-					value={userData.lastName}
-					onChangeText={(text) =>
-						setUserData((prev) => ({ ...prev, lastName: text }))
-					}
-				/>
-				<Input
-					label="Email"
-					placeholder="email@email.com"
-					error={userData.email.length != 0 && !validateEmail(userData.email)}
-					errorMessage="Please input a valid email."
-					value={userData.email}
-					onChangeText={(text) =>
-						setUserData((prev) => ({ ...prev, email: text }))
-					}
-				/>
-
-				<Input
-					label="Phone"
-					placeholder="+61 ...."
-					value={userData.phone}
-					onChange={(text) =>
-						setUserData((prev) => ({ ...prev, phone: Number(text) }))
-					}
-				/>
-				<Input
-					label="Password"
-					placeholder="Password"
-					value={userData.password}
-					secureTextEntry
-					onChange={(text) =>
-						setUserData((prev) => ({
-							...prev,
-							password: text.nativeEvent.text,
-						}))
-					}
-				/>
-				<InputWrapper>
-					<Text>Date of Birth</Text>
-					<DateTimePicker
-						testID="dateTimePicker"
-						value={date}
-						is24Hour={true}
-						onChange={onChange}
+			<PageWrapper>
+				<StyledComponentWrapper>
+					<ComponentWrapper>
+						<Title>Hey there!</Title>
+						<HeroImage source={signup} />
+					</ComponentWrapper>
+					<AssistText>Sign up</AssistText>
+					<Input
+						label="name"
+						placeholder="Name"
+						value={userData.firstName}
+						onChangeText={(text) =>
+							setUserData((prev) => ({ ...prev, firstName: text }))
+						}
 					/>
-				</InputWrapper>
-				<Button
-					onPress={() => console.log(userData)}
-					title={'Signup'}
-					variant={'primary'}
-				/>
-			</StyledComponentWrapper>
+
+					<Input
+						label="Email"
+						placeholder="Email"
+						error={userData.email.length != 0 && !validateEmail(userData.email)}
+						errorMessage="Please input a valid email."
+						value={userData.email}
+						onChangeText={(text) =>
+							setUserData((prev) => ({ ...prev, email: text }))
+						}
+					/>
+					<Input
+						label="Password"
+						placeholder="Password"
+						value={userData.password}
+						secureTextEntry
+						onChange={(text) =>
+							setUserData((prev) => ({
+								...prev,
+								password: text.nativeEvent.text,
+							}))
+						}
+					/>
+					<Button
+						onPress={() => console.log(userData)}
+						title={'Signup'}
+						variant={'secondary'}
+					/>
+				</StyledComponentWrapper>
+			</PageWrapper>
 		</StyledWrapper>
 	);
 };
