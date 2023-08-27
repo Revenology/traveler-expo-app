@@ -5,9 +5,6 @@ import { styled } from 'styled-components/native';
 export const StyledWrapper = styled(KeyboardAvoidingView)`
 	width: 100%;
 	height: 100%;
-	flex: 1;
-	align-items: center;
-	justify-content: space-;
 `;
 
 export const StyledComponentWrapper = styled(View)`
@@ -50,7 +47,7 @@ export const ComponentWrapper = styled(View)`
 	align-items: center;
 	overflow: auto;
 	justify-content: center;
-	gap: 40px;
+	gap: 10px;
 	width: 100%;
 	height: 40%;
 	z-index: 1;

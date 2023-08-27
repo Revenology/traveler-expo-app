@@ -1,6 +1,5 @@
 import { Pressable, StyleSheet } from 'react-native';
-import logo from '../../../assets/images/logo.png';
-import tile from '../../../assets/blush/landing.png';
+import tile from '../../assets/blush/landing.png';
 import React from 'react';
 import {
 	Image,
@@ -42,7 +41,7 @@ const Landing = () => {
 					variant="secondary"
 					title="Sign up"
 					onPress={() => {
-						router.push('/(tabs)/signup/Index');
+						router.push('/signup/Index');
 					}}
 				/>
 			</StyledComponentWrapper>
