@@ -64,6 +64,10 @@ function RootLayoutNav() {
 			<ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
 				<DismissKeyboard>
 					<Stack>
+						<Stack.Screen
+							name="login/Index"
+							options={{ presentation: 'modal', headerShown: false }}
+						/>
 						<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 						<Stack.Screen name="modal" options={{ presentation: 'modal' }} />
 					</Stack>

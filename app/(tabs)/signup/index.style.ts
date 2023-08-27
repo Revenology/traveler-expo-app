@@ -45,3 +45,21 @@ export const InputWrapper = styled(View)`
 	height: auto;
 	margin-bottom: 30px;
 `;
+
+export const ComponentWrapper = styled(View)`
+	align-items: center;
+	overflow: auto;
+	justify-content: center;
+	gap: 40px;
+	width: 100%;
+	height: 40%;
+	z-index: 1;
+`;
+
+export const AssistText = styled(Text)`
+	width: 75%;
+	font-size: 20;
+	font-weight: bold;
+	margin: 0px;
+	padding: 0px;
+`;
