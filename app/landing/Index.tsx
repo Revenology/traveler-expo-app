@@ -41,7 +41,7 @@ const Landing = () => {
 					variant="secondary"
 					title="Sign up"
 					onPress={() => {
-						router.push('/(tabs)/signup/Index');
+						router.push('/signup/Index');
 					}}
 				/>
 			</StyledComponentWrapper>

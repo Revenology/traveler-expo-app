@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
-import { Image, SafeAreaView, TextInput } from 'react-native';
-import signup from '../../../assets/blush/signup.png';
+import signup from '../../assets/blush/signup.png';
 import {
 	AssistText,
 	ComponentWrapper,
-	InputWrapper,
 	StyledComponentWrapper,
 	StyledWrapper,
 } from './Index.style';
 import { UserDataProps } from '@/constants/types';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import Button from '@/components/common/button/Button';
-import { Text } from '@/components/Themed';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import {
 	validateEmail,
 	validatePassword,
@@ -33,40 +28,13 @@ const Signup = () => {
 		password: '',
 		phone: null,
 	});
-	const [errorData, setErrorData] = useState({
-		username: false,
-		firstName: false,
-		lastName: false,
-		dob: false,
-		email: false,
-		password: false,
-		phone: null,
-	});
-	const [date, setDate] = useState(new Date('1990-01-01'));
-	const [mode, setMode] = useState('date');
-	const [show, setShow] = useState(false);
-
-	const onChange = (event, selectedDate) => {
-		const currentDate = selectedDate;
-		// setShow(false);
-		setDate(currentDate);
-	};
-
-	const showMode = (currentMode) => {
-		setShow(true);
-		setMode(currentMode);
-	};
-
-	const showDatepicker = () => {
-		showMode('date');
-	};
 
 	// TODO: Implement checkFields
-	const checkFields = async () => {
-		await validateUsername(userData.username);
-		validatePassword(userData.password);
-		validateEmail(userData.email);
-	};
+	// const checkFields = async () => {
+	// 	await validateUsername(userData.username);
+	// 	validatePassword(userData.password);
+	// 	validateEmail(userData.email);
+	// };
 
 	return (
 		<StyledWrapper behavior="position">

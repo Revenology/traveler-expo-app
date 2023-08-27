@@ -6,5 +6,4 @@ export const Title = styled(Text)`
 	font-weight: bold;
 	margin: 0px;
 	padding: 0px;
-	margin-bottom: 10px;
 `;
