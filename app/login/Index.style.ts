@@ -7,7 +7,7 @@ export const ComponentWrapper = styled(View)`
 	align-items: center;
 	overflow: auto;
 	justify-content: center;
-	gap: 40px;
+	gap: 30px;
 	width: 100%;
 	height: 40%;
 	z-index: 1;
@@ -37,9 +37,6 @@ export const ButtonWrapper = styled(View)`
 export const StyledWrapper = styled(KeyboardAvoidingView)`
 	width: 100%;
 	height: 100%;
-	flex: 1;
-	align-items: center;
-	justify-content: center;
 `;
 
 export const AssistText = styled(Text)`

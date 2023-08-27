@@ -16,11 +16,11 @@ import {
 } from './Index.style';
 import { Title } from '@/components/common/Title';
 import { Link } from 'expo-router';
-import HeroImage from '@/components/common/HeroImage/HeroImage';
+import HeroImage from '@/components/common/heroImage/HeroImage';
 
 const Login = () => {
 	return (
-		<StyledWrapper behavior="padding">
+		<StyledWrapper behavior="position">
 			<PageWrapper>
 				<ComponentWrapper>
 					<Title>Welcome back!</Title>

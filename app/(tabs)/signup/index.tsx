@@ -20,7 +20,7 @@ import {
 } from '@/utils/util';
 import Input from '@/components/common/textinput/Input';
 import { PageWrapper } from '@/components/common/PageWrapper';
-import HeroImage from '@/components/common/HeroImage/HeroImage';
+import HeroImage from '@/components/common/heroImage/HeroImage';
 import { Title } from '@/components/common/Title';
 
 const Signup = () => {
@@ -69,7 +69,7 @@ const Signup = () => {
 	};
 
 	return (
-		<StyledWrapper behavior="padding">
+		<StyledWrapper behavior="position">
 			<PageWrapper>
 				<StyledComponentWrapper>
 					<ComponentWrapper>
