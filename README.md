@@ -12,10 +12,10 @@ Run the following commands:
 
 To run the application run one of the following command based on your platform:
 
--   npm run
+-   npm start
 
 Or if you are using Yarn
--   Yarn run
+-   Yarn start
 
 Scan QR code
 
