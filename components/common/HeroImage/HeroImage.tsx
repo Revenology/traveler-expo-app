@@ -1,12 +1,12 @@
-import React from 'react';
-import { ImageContainer, ImageMain } from './HeroImage.style';
+import React from "react";
+import { ImageContainer, ImageMain } from "./HeroImage.style";
 
-const HeroImage = ({ source }) => {
-	return (
-		<ImageContainer>
-			<ImageMain source={source} />
-		</ImageContainer>
-	);
+const HeroImage = ({ sourceUrl }: { sourceUrl: string }) => {
+    return (
+        <ImageContainer>
+            <ImageMain source={{ uri: sourceUrl }} />
+        </ImageContainer>
+    );
 };
 
 export default HeroImage;
