@@ -1,5 +1,5 @@
 import { PageWrapper } from '@/components/common/PageWrapper';
-import images from '../../assets/images';
+import loginImage from '../../assets/blush/login.png';
 import Button from '@/components/common/button/Button';
 import Input from '@/components/common/textinput/Input';
 import React, { useState } from 'react';
@@ -35,7 +35,7 @@ const Login = () => {
 			<PageWrapper>
 				<ComponentWrapper>
 					<Title>Welcome back!</Title>
-					<HeroImage source={images.loginImage} />
+					<HeroImage sourceUrl={loginImage} />
 				</ComponentWrapper>
 				<LoginWrapper>
 					<AssistText>Login</AssistText>

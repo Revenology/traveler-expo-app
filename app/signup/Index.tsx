@@ -42,7 +42,7 @@ const Signup = () => {
 				<StyledComponentWrapper>
 					<ComponentWrapper>
 						<Title>Hey there!</Title>
-						<HeroImage source={signup} />
+						<HeroImage sourceUrl={signup} />
 					</ComponentWrapper>
 					<AssistText>Sign up</AssistText>
 					<Input
