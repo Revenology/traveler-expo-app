@@ -30,13 +30,13 @@ const Landing = () => {
 				</Text>
 			</StyledComponentWrapper>
 			<StyledComponentWrapper>
-				<Button
+				{/* <Button
 					variant="primary"
 					title="Calendar"
 					onPress={() => {
 						router.push('/tripPlan/TripPlan');
 					}}
-				/>
+				/> */}
 				<Button
 					variant="primary"
 					title="Login"
