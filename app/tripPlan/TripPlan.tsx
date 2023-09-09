@@ -3,12 +3,11 @@ import CalendarPlan from '@/components/calendar/CalendarPlan';
 import { PageWrapper } from '@/components/common/PageWrapper';
 import Button from '@/components/common/button/Button';
 import Input from '@/components/common/textinput/Input';
-import ProgressStepper from '@/components/progressStepper/ProgressStepper';
 import React, { useState } from 'react';
-import { GestureResponderEvent, KeyboardAvoidingView } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native';
 import { ButtonWrapper, SearchWrapper } from './TripPlan.styled';
 
-interface FormData {
+export interface FormData {
 	tripName?: string;
 	startDate?: string;
 	endDate?: string;
@@ -18,10 +17,14 @@ interface FormData {
 const TripPlan = () => {
 	const [formData, setFormData] = useState<FormData>({ destination: '' });
 
-	const handleTextChange = (key: any, text: string) => {
+	const handleTextChange = (key: string, text: string) => {
 		setFormData((prev) => {
 			return { ...prev, [key]: text };
 		});
+	};
+
+	const checkDate = () => {
+		if (!formData.startDate || !formData.endDate) return;
 	};
 	return (
 		<KeyboardAvoidingView>
@@ -33,22 +36,18 @@ const TripPlan = () => {
 						onChangeText={(text) => handleTextChange('destination', text)}
 					/>
 				</SearchWrapper>
-				<CalendarPlan />
+				<CalendarPlan setFormData={setFormData} />
 				<ButtonWrapper>
 					<Button
-						onPress={function (event: GestureResponderEvent): void {
-							throw new Error('Function not implemented.');
-						}}
+						onPress={() => checkDate()}
 						title={'Add destination'}
 						variant={'primary'}
 					/>
 					{/* <ProgressStepper /> */}
 
 					<Button
-						onPress={function (event: GestureResponderEvent): void {
-							throw new Error('Function not implemented.');
-						}}
-						title={'Next'}
+						onPress={() => console.log('removedDates')}
+						title={'Cancel'}
 						variant={'secondary'}
 					/>
 				</ButtonWrapper>
