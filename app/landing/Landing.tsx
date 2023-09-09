@@ -1,19 +1,15 @@
-import { Pressable, StyleSheet } from 'react-native';
 import tile from '../../assets/blush/landing.png';
 import React from 'react';
 import {
-	Image,
 	ImageContainer,
 	ImageMain,
 	StyledComponentWrapper,
 	StyledWrapper,
 	Title,
-} from './Index.style';
-import { Link, useRouter } from 'expo-router';
+} from './Landing.style';
+import { useRouter } from 'expo-router';
 import Button from '@/components/common/button/Button';
 import { Text } from '@/components/Themed';
-import { FontAwesome } from '@expo/vector-icons';
-import Colors from '@/constants/Colors';
 
 const Landing = () => {
 	const router = useRouter();
@@ -30,25 +26,25 @@ const Landing = () => {
 				</Text>
 			</StyledComponentWrapper>
 			<StyledComponentWrapper>
-				{/* <Button
+				<Button
 					variant="primary"
-					title="Calendar"
+					title="Test Feature"
 					onPress={() => {
-						router.push('/tripPlan/TripPlan');
+						router.push('/map/Map');
 					}}
-				/> */}
+				/>
 				<Button
 					variant="primary"
 					title="Login"
 					onPress={() => {
-						router.push('/login/Index');
+						router.push('/login/Login');
 					}}
 				/>
 				<Button
 					variant="secondary"
 					title="Sign up"
 					onPress={() => {
-						router.push('/signup/Index');
+						router.push('/signup/Signup');
 					}}
 				/>
 			</StyledComponentWrapper>

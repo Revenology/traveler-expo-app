@@ -18,7 +18,7 @@ export {
 
 export const unstable_settings = {
 	// Ensure that reloading on `/modal` keeps a back button present.
-	initialRouteName: 'landing/Index',
+	initialRouteName: 'landing/Landing',
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -52,7 +52,6 @@ export default function RootLayout() {
 	if (!loaded) {
 		return null;
 	}
-
 	return <RootLayoutNav />;
 }
 
@@ -63,21 +62,25 @@ function RootLayoutNav() {
 		<QueryClientProvider client={queryClient}>
 			<ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
 				<DismissKeyboard>
-					<Stack>
+					<Stack initialRouteName="landing/Landing">
 						<Stack.Screen
-							name="landing/Index"
-							options={{ headerShown: false }}
+							name="landing/Landing"
+							options={{ headerShown: false, title: 'home' }}
 						/>
 						<Stack.Screen
-							name="login/Index"
+							name="login/Login"
 							options={{ presentation: 'modal', headerShown: false }}
 						/>
 						<Stack.Screen
-							name="signup/Index"
+							name="signup/Signup"
 							options={{ presentation: 'modal', headerShown: false }}
 						/>
 						<Stack.Screen
 							name="tripPlan/TripPlan"
+							options={{ presentation: 'modal', headerShown: false }}
+						/>
+						<Stack.Screen
+							name="map/Map"
 							options={{ presentation: 'modal', headerShown: false }}
 						/>
 						<Stack.Screen name="(tabs)" options={{ headerShown: false }} />

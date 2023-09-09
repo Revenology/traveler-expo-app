@@ -9,7 +9,7 @@ import {
 	ComponentWrapper,
 	LoginWrapper,
 	StyledWrapper,
-} from './Index.style';
+} from './Login.style';
 import { Title } from '@/components/common/Title';
 import HeroImage from '@/components/common/heroImage/HeroImage';
 import { LoginProps } from '@/constants/types';
@@ -25,10 +25,10 @@ const Login = () => {
 		userLogin(userData);
 	};
 
-	const handleChange = (text: any, name: string) => {
-		console.log(text.nativeEvent);
-		setUserData({ ...userData, [name]: text.nativeEvent.text });
-	};
+	// const handleChange = (text: any, name: string) => {
+	// 	console.log(text.nativeEvent);
+	// 	setUserData({ ...userData, [name]: text.nativeEvent.text });
+	// };
 
 	return (
 		<StyledWrapper behavior="position">
