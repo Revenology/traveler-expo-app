@@ -20,17 +20,15 @@ const CalendarPlan = () => {
 
 	const getDatesBetween = (startDate: string, endDate: string): string[] => {
 		const betweenArray: string[] = [];
-		const [startYear, startMonth, startDay] = startDate.split('-');
-		const [, , endDay] = endDate.split('-');
+		const currentDate = new Date(startDate);
+		const convertEndDate = new Date(endDate);
+		currentDate.setDate(currentDate.getDate() + 1);
 
-		const daysBetween = Number(endDay) - Number(startDay);
-
-		for (let i = 1; i < daysBetween; i++) {
-			const tempDay = Number(startDay) + i;
-			betweenArray.push(
-				`${startYear}-${startMonth}-${tempDay < 10 ? '0' + tempDay : tempDay}`
-			);
+		while (currentDate < convertEndDate) {
+			betweenArray.push(new Date(currentDate).toISOString().slice(0, 10));
+			currentDate.setDate(currentDate.getDate() + 1);
 		}
+
 		return betweenArray;
 	};
 
