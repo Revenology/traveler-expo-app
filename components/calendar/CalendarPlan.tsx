@@ -1,3 +1,4 @@
+import { FormData } from '@/app/tripPlan/TripPlan';
 import React, { useState } from 'react';
 import { Calendar } from 'react-native-calendars';
 
@@ -9,14 +10,12 @@ interface DayProps {
 	year: number;
 }
 
-// interface TripData {
-// 	location?: string;
-// 	startingDay?: string;
-// 	endingDay?: string;
-// }
+interface TripData {
+	setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+}
 
-const CalendarPlan = () => {
-	const [formData, setFormData] = useState({});
+const CalendarPlan = ({ setFormData }: TripData) => {
+	const [dateData, setDateData] = useState({});
 
 	const getDatesBetween = (startDate: string, endDate: string): string[] => {
 		const betweenArray: string[] = [];
@@ -33,14 +32,14 @@ const CalendarPlan = () => {
 	};
 
 	const handleDateSelection = ({ dateString }: DayProps) => {
-		const keys = Object.keys(formData);
+		const keys = Object.keys(dateData);
 
 		if (
 			keys.length == 0 ||
 			(keys && keys.length >= 2) ||
 			(keys.length < 2 && Date.parse(dateString) < Date.parse(keys[0]))
-		)
-			setFormData({
+		) {
+			setDateData({
 				[dateString]: {
 					startingDay: true,
 					endingDay: true,
@@ -49,12 +48,16 @@ const CalendarPlan = () => {
 					textColor: 'white',
 				},
 			});
+			setFormData((prev) => {
+				return { ...prev, startDate: dateString, endDate: '' };
+			});
+		}
 		if (
 			keys &&
 			keys.length < 2 &&
 			Date.parse(dateString) > Date.parse(keys[0])
 		) {
-			setFormData((prev) => {
+			setDateData((prev) => {
 				interface TempData {
 					[key: string]: {
 						[key: string]: string;
@@ -66,6 +69,9 @@ const CalendarPlan = () => {
 					tempData[date] = { color: 'red', textColor: 'white' };
 				}
 				const newPrev = { [keys[0]]: { ...prev[keys[0]], endingDay: false } };
+				setFormData((prev) => {
+					return { ...prev, endDate: dateString };
+				});
 
 				return {
 					...newPrev,
@@ -84,7 +90,7 @@ const CalendarPlan = () => {
 		<>
 			<Calendar
 				markingType={'period'}
-				markedDates={formData}
+				markedDates={dateData}
 				style={{ width: 350 }}
 				onDayPress={(day) => {
 					handleDateSelection(day);
