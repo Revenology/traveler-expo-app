@@ -5,14 +5,10 @@ import {
 	ComponentWrapper,
 	StyledComponentWrapper,
 	StyledWrapper,
-} from './Index.style';
+} from './Signup.style';
 import { UserDataProps } from '@/constants/types';
 import Button from '@/components/common/button/Button';
-import {
-	validateEmail,
-	validatePassword,
-	validateUsername,
-} from '@/utils/util';
+import { validateEmail } from '@/utils/util';
 import Input from '@/components/common/textinput/Input';
 import { PageWrapper } from '@/components/common/PageWrapper';
 import HeroImage from '@/components/common/heroImage/HeroImage';
