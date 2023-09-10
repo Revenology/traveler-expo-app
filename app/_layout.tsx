@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { Keyboard, useColorScheme } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native';
 import { QueryClientProvider, QueryClient } from 'react-query';
+import { AutocompleteDropdownContextProvider } from 'react-native-autocomplete-dropdown';
 export {
 	// Catch any errors thrown by the Layout component.
 	ErrorBoundary,
@@ -59,35 +60,39 @@ function RootLayoutNav() {
 	const colorScheme = useColorScheme();
 
 	return (
-		<QueryClientProvider client={queryClient}>
-			<ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-				<DismissKeyboard>
-					<Stack initialRouteName="landing/Landing">
-						<Stack.Screen
-							name="landing/Landing"
-							options={{ headerShown: false, title: 'home' }}
-						/>
-						<Stack.Screen
-							name="login/Login"
-							options={{ presentation: 'modal', headerShown: false }}
-						/>
-						<Stack.Screen
-							name="signup/Signup"
-							options={{ presentation: 'modal', headerShown: false }}
-						/>
-						<Stack.Screen
-							name="tripPlan/TripPlan"
-							options={{ presentation: 'modal', headerShown: false }}
-						/>
-						<Stack.Screen
-							name="map/Map"
-							options={{ presentation: 'modal', headerShown: false }}
-						/>
-						<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-						<Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-					</Stack>
-				</DismissKeyboard>
-			</ThemeProvider>
-		</QueryClientProvider>
+		<AutocompleteDropdownContextProvider>
+			<QueryClientProvider client={queryClient}>
+				<ThemeProvider
+					value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+				>
+					<DismissKeyboard>
+						<Stack initialRouteName="landing/Landing">
+							<Stack.Screen
+								name="landing/Landing"
+								options={{ headerShown: false, title: 'home' }}
+							/>
+							<Stack.Screen
+								name="login/Login"
+								options={{ presentation: 'modal', headerShown: false }}
+							/>
+							<Stack.Screen
+								name="signup/Signup"
+								options={{ presentation: 'modal', headerShown: false }}
+							/>
+							<Stack.Screen
+								name="tripPlan/TripPlan"
+								options={{ presentation: 'modal', headerShown: false }}
+							/>
+							<Stack.Screen
+								name="map/Map"
+								options={{ presentation: 'modal', headerShown: false }}
+							/>
+							<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+							<Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+						</Stack>
+					</DismissKeyboard>
+				</ThemeProvider>
+			</QueryClientProvider>
+		</AutocompleteDropdownContextProvider>
 	);
 }
