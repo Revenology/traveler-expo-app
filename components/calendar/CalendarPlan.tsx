@@ -15,7 +15,8 @@ interface TripData {
 }
 
 const CalendarPlan = ({ setFormData }: TripData) => {
-	const [dateData, setDateData] = useState({});
+	//TODO: Extrat datatype of Calendar
+	const [dateData, setDateData] = useState<{ [key: string]: any }>({});
 
 	const getDatesBetween = (startDate: string, endDate: string): string[] => {
 		const betweenArray: string[] = [];
@@ -32,7 +33,7 @@ const CalendarPlan = ({ setFormData }: TripData) => {
 	};
 
 	const handleDateSelection = ({ dateString }: DayProps) => {
-		const keys = Object.keys(dateData);
+		const keys: string[] = Object.keys(dateData);
 
 		if (
 			keys.length == 0 ||

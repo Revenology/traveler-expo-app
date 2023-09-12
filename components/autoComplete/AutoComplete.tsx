@@ -1,7 +1,11 @@
-import React, { useImperativeHandle, useRef, useState } from 'react';
-import { View, Text } from '../Themed';
-import { FlatList, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList } from 'react-native';
 import Input from '../common/textinput/Input';
+import {
+	ScreenWrapper,
+	StyledPressable,
+	StyledText,
+} from './AutoComplete.styled';
 
 export interface Region {
 	country: string;
@@ -10,7 +14,11 @@ export interface Region {
 	long: number;
 }
 
-const AutoComplete = ({ setState }) => {
+const AutoComplete = ({
+	setState,
+}: {
+	setState: React.Dispatch<React.SetStateAction<Region | undefined>>;
+}) => {
 	const dataFaker: Region[] = [
 		{ country: 'Australia', city: 'Sydney', lat: -33.8688, long: 151.2093 },
 		{
@@ -34,31 +42,31 @@ const AutoComplete = ({ setState }) => {
 		setState(item);
 		console.log(item);
 	};
-	const updateSearchList = (item: string) => {
-		setText(item);
+	const updateSearchList = (word: string) => {
+		setText(word);
 		setData(() => {
 			return dataFaker.filter(
 				(place) =>
-					place.city.toLowerCase().startsWith(item.toLowerCase()) ||
-					place.country.toLowerCase().startsWith(item.toLowerCase())
+					place.city.toLowerCase().startsWith(word.toLowerCase()) ||
+					place.country.toLowerCase().startsWith(word.toLowerCase())
 			);
 		});
 	};
 
-	return (
-		<View
-			style={{
-				backgroundColor: '',
-				width: '100%',
-				padding: 0,
-				margin: 0,
-				borderRadius: 10,
-				alignItems: 'center',
-				position: 'absolute',
-				top: 75,
-				zIndex: 3,
+	const ListItem = ({ country, city, lat, long }: Region) => (
+		<StyledPressable
+			onPress={() => {
+				onPress({ country, city, lat, long }),
+				setDropVis(false),
+				setText(`${city}, ${country}`);
 			}}
 		>
+			<StyledText>{`${city}, ${country}`}</StyledText>
+		</StyledPressable>
+	);
+
+	return (
+		<ScreenWrapper>
 			<Input
 				value={text}
 				placeholder="Search"
@@ -72,36 +80,19 @@ const AutoComplete = ({ setState }) => {
 			{dropVis && (
 				<FlatList
 					data={data}
-					style={{
-						width: '80%',
-						borderRadius: 10,
-						position: 'absolute',
-						backgroundColor: 'rgba(255,255,255,0.5)',
-						top: 50,
+					renderItem={({ item }: { item: Region }) => {
+						return (
+							<ListItem
+								country={item.country}
+								city={item.city}
+								lat={item.lat}
+								long={item.long}
+							/>
+						);
 					}}
-					renderItem={({ item }) => (
-						<Pressable
-							onPress={() => {
-								onPress(item),
-								setDropVis(false),
-								setText(`${item.city}, ${item.country}`);
-							}}
-							style={{
-								alignItems: 'center',
-								margin: 5,
-								padding: 5,
-								backgroundColor: 'red',
-								borderRadius: 10,
-							}}
-						>
-							<Text
-								style={{ color: 'white' }}
-							>{`${item.city}, ${item.country}`}</Text>
-						</Pressable>
-					)}
 				/>
 			)}
-		</View>
+		</ScreenWrapper>
 	);
 };
 
