@@ -1,4 +1,4 @@
-import { PageWrapper, PageWrapperSpace } from '@/components/common/PageWrapper';
+import { PageWrapper } from '@/components/common/PageWrapper';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView } from 'react-native';
 import pin from '../../assets/images/pin.png';
