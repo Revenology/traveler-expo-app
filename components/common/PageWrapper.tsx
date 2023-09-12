@@ -7,3 +7,10 @@ export const PageWrapper = styled(View)`
 	align-items: center;
 	justify-content: center;
 `;
+
+export const PageWrapperSpace = styled(View)`
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: space-around;
+`;

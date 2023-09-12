@@ -12,6 +12,9 @@ export interface InputProps {
 	label?: string;
 	secureTextEntry?: boolean;
 	onChange?: any;
+	onFocus?: any;
+	onBlur?: any;
+	ref?: any;
 }
 
 const Input = ({
@@ -23,6 +26,9 @@ const Input = ({
 	label,
 	secureTextEntry,
 	onChange,
+	onFocus,
+	onBlur,
+	ref,
 }: InputProps) => {
 	return (
 		<>
@@ -33,6 +39,9 @@ const Input = ({
 					value={value}
 					placeholder={placeholder}
 					onChangeText={onChangeText}
+					onFocus={onFocus}
+					onBlur={onBlur}
+					ref={ref}
 				/>
 			</StyledWrapper>
 			{error && <StyledError>{errorMessage}</StyledError>}

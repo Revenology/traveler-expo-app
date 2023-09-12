@@ -81,11 +81,16 @@ function RootLayoutNav() {
 							/>
 							<Stack.Screen
 								name="tripPlan/TripPlan"
-								options={{ presentation: 'modal', headerShown: false }}
+								options={{
+									presentation: 'modal',
+									headerShown: false,
+								}}
 							/>
 							<Stack.Screen
 								name="map/Map"
-								options={{ presentation: 'modal', headerShown: false }}
+								options={{
+									headerShown: false,
+								}}
 							/>
 							<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 							<Stack.Screen name="modal" options={{ presentation: 'modal' }} />

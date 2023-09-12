@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useImperativeHandle, useRef, useState } from 'react';
 import { View, Text } from '../Themed';
 import { FlatList, Pressable } from 'react-native';
 import Input from '../common/textinput/Input';
@@ -28,6 +28,7 @@ const AutoComplete = ({ setState }) => {
 	];
 	const [text, setText] = useState('');
 	const [data, setData] = useState(dataFaker);
+	const [dropVis, setDropVis] = useState(false);
 
 	const onPress = (item: Region) => {
 		setState(item);
@@ -47,36 +48,59 @@ const AutoComplete = ({ setState }) => {
 	return (
 		<View
 			style={{
-				height: '20%',
+				backgroundColor: '',
 				width: '100%',
+				padding: 0,
+				margin: 0,
 				borderRadius: 10,
 				alignItems: 'center',
-				position: 'relative',
+				position: 'absolute',
+				top: 75,
+				zIndex: 3,
 			}}
 		>
 			<Input
 				value={text}
 				placeholder="Search"
-				onChangeText={(item) => updateSearchList(item)}
+				onChangeText={(item) => {
+					updateSearchList(item);
+					setDropVis(true);
+				}}
+				onFocus={() => setDropVis(true)}
+				onBlur={() => setDropVis(false)}
 			/>
-			<FlatList
-				data={data}
-				style={{ width: '80%' }}
-				renderItem={({ item }) => (
-					<Pressable
-						onPress={() => onPress(item)}
-						style={{
-							alignItems: 'center',
-							margin: 5,
-							padding: 5,
-							backgroundColor: 'red',
-							borderRadius: 10,
-						}}
-					>
-						<Text>{`${item.city}, ${item.country}`}</Text>
-					</Pressable>
-				)}
-			/>
+			{dropVis && (
+				<FlatList
+					data={data}
+					style={{
+						width: '80%',
+						borderRadius: 10,
+						position: 'absolute',
+						backgroundColor: 'rgba(255,255,255,0.5)',
+						top: 50,
+					}}
+					renderItem={({ item }) => (
+						<Pressable
+							onPress={() => {
+								onPress(item),
+								setDropVis(false),
+								setText(`${item.city}, ${item.country}`);
+							}}
+							style={{
+								alignItems: 'center',
+								margin: 5,
+								padding: 5,
+								backgroundColor: 'red',
+								borderRadius: 10,
+							}}
+						>
+							<Text
+								style={{ color: 'white' }}
+							>{`${item.city}, ${item.country}`}</Text>
+						</Pressable>
+					)}
+				/>
+			)}
 		</View>
 	);
 };
