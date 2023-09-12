@@ -1,4 +1,4 @@
-import { PageWrapper } from '@/components/common/PageWrapper';
+import { PageWrapper, PageWrapperSpace } from '@/components/common/PageWrapper';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView } from 'react-native';
 import pin from '../../assets/images/pin.png';
@@ -6,13 +6,14 @@ import MapView, { Marker } from 'react-native-maps';
 import { ButtonWrapper } from './Map.styled';
 import Button from '@/components/common/button/Button';
 import AutoComplete, { Region } from '@/components/autoComplete/AutoComplete';
+import { useRouter } from 'expo-router';
 
 const Map = () => {
 	const [region, setRegion] = useState<Region>();
+	const router = useRouter();
 	return (
 		<KeyboardAvoidingView>
 			<PageWrapper>
-				<AutoComplete setState={setRegion} />
 				<MapView
 					initialRegion={{
 						latitude: 37.78825,
@@ -36,8 +37,8 @@ const Map = () => {
 							  }
 					}
 					style={{
-						width: '80%',
-						height: '50%',
+						width: '90%',
+						height: '70%',
 						borderRadius: 10,
 						zIndex: 2,
 					}}
@@ -56,15 +57,16 @@ const Map = () => {
 						image={pin}
 					/>
 				</MapView>
+				<AutoComplete setState={setRegion} />
 				<ButtonWrapper>
 					<Button
-						onPress={() => console.log('pressed')}
-						title={'Add destination'}
+						onPress={() => router.push('/tripPlan/TripPlan')}
+						title={'Select dates'}
 						variant={'primary'}
 					/>
 
 					<Button
-						onPress={() => console.log('removedDates')}
+						onPress={() => router.back()}
 						title={'Cancel'}
 						variant={'secondary'}
 					/>

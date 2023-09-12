@@ -1,11 +1,11 @@
-import { Text } from '@/components/Themed';
 import CalendarPlan from '@/components/calendar/CalendarPlan';
-import { PageWrapper } from '@/components/common/PageWrapper';
+import { PageWrapper, PageWrapperSpace } from '@/components/common/PageWrapper';
 import Button from '@/components/common/button/Button';
 import Input from '@/components/common/textinput/Input';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView } from 'react-native';
 import { ButtonWrapper, SearchWrapper } from './TripPlan.styled';
+import { useRouter } from 'expo-router';
 
 export interface FormData {
 	tripName?: string;
@@ -16,6 +16,7 @@ export interface FormData {
 
 const TripPlan = () => {
 	const [formData, setFormData] = useState<FormData>({ destination: '' });
+	const router = useRouter();
 
 	const handleTextChange = (key: string, text: string) => {
 		setFormData((prev) => {
@@ -28,30 +29,25 @@ const TripPlan = () => {
 	};
 	return (
 		<KeyboardAvoidingView>
-			<PageWrapper>
-				<SearchWrapper>
-					<Input
-						value={formData.destination}
-						placeholder="Search"
-						onChangeText={(text) => handleTextChange('destination', text)}
-					/>
-				</SearchWrapper>
+			<PageWrapperSpace>
 				<CalendarPlan setFormData={setFormData} />
 				<ButtonWrapper>
 					<Button
-						onPress={() => checkDate()}
+						onPress={() => {
+							checkDate(), router.back();
+						}}
 						title={'Add destination'}
 						variant={'primary'}
 					/>
 					{/* <ProgressStepper /> */}
 
 					<Button
-						onPress={() => console.log('removedDates')}
+						onPress={() => router.back()}
 						title={'Cancel'}
 						variant={'secondary'}
 					/>
 				</ButtonWrapper>
-			</PageWrapper>
+			</PageWrapperSpace>
 		</KeyboardAvoidingView>
 	);
 };
