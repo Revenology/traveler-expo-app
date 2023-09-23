@@ -30,7 +30,7 @@ const Landing = () => {
 					variant="primary"
 					title="Test Feature"
 					onPress={() => {
-						router.push('/map/Map');
+						router.push('/tripFlow/map/Map');
 					}}
 				/>
 				<Button

@@ -1,4 +1,4 @@
-import { FormData } from '@/app/tripPlan/TripPlan';
+import { FormData } from '@/app/tripFlow/tripPlan/TripPlan';
 import React, { useState } from 'react';
 import { Calendar } from 'react-native-calendars';
 
