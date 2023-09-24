@@ -1,5 +1,5 @@
-import { FormData } from '@/app/tripFlow/tripPlan/TripPlan';
-import React, { useState } from 'react';
+import { MapDateContext } from '@/app/.appSetup/context';
+import React, { useContext, useState } from 'react';
 import { Calendar } from 'react-native-calendars';
 
 interface DayProps {
@@ -9,14 +9,18 @@ interface DayProps {
 	timestamp: number;
 	year: number;
 }
-
-interface TripData {
-	setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+interface TempData {
+	[key: string]: {
+		[key: string]: string;
+	};
 }
 
-const CalendarPlan = ({ setFormData }: TripData) => {
+const CalendarPlan = () => {
 	//TODO: Extrat datatype of Calendar
-	const [dateData, setDateData] = useState<{ [key: string]: any }>({});
+	const [dateData, setDateData] = useState<{
+		[key: string]: { [key: string]: unknown };
+	}>({});
+	const { setMapDate } = useContext(MapDateContext);
 
 	const getDatesBetween = (startDate: string, endDate: string): string[] => {
 		const betweenArray: string[] = [];
@@ -49,7 +53,7 @@ const CalendarPlan = ({ setFormData }: TripData) => {
 					textColor: 'white',
 				},
 			});
-			setFormData((prev) => {
+			setMapDate((prev) => {
 				return { ...prev, startDate: dateString, endDate: '' };
 			});
 		}
@@ -58,22 +62,16 @@ const CalendarPlan = ({ setFormData }: TripData) => {
 			keys.length < 2 &&
 			Date.parse(dateString) > Date.parse(keys[0])
 		) {
+			setMapDate((prev) => {
+				return { ...prev, endDate: dateString };
+			});
 			setDateData((prev) => {
-				interface TempData {
-					[key: string]: {
-						[key: string]: string;
-					};
-				}
 				const tempData: TempData = {};
 				const datesBetween = getDatesBetween(keys[0], dateString);
 				for (const date of datesBetween) {
 					tempData[date] = { color: 'red', textColor: 'white' };
 				}
 				const newPrev = { [keys[0]]: { ...prev[keys[0]], endingDay: false } };
-				setFormData((prev) => {
-					return { ...prev, endDate: dateString };
-				});
-
 				return {
 					...newPrev,
 					...tempData,
@@ -95,7 +93,6 @@ const CalendarPlan = ({ setFormData }: TripData) => {
 				style={{ width: 350 }}
 				onDayPress={(day) => {
 					handleDateSelection(day);
-					console.log('selected day', day);
 				}}
 			/>
 		</>

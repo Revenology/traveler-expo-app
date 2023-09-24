@@ -1,40 +1,44 @@
 import CalendarPlan from '@/components/calendar/CalendarPlan';
-import { PageWrapper, PageWrapperSpace } from '@/components/common/PageWrapper';
+import { PageWrapperSpace } from '@/components/common/PageWrapper';
 import Button from '@/components/common/button/Button';
-import Input from '@/components/common/textinput/Input';
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { KeyboardAvoidingView } from 'react-native';
-import { ButtonWrapper, SearchWrapper } from './TripPlan.styled';
+import { ButtonWrapper } from './TripPlan.styled';
 import { useRouter } from 'expo-router';
-
-export interface FormData {
-	tripName?: string;
-	startDate?: string;
-	endDate?: string;
-	destination: string;
-}
+import { MapDateContext } from '@/app/.appSetup/context';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateFormData } from '@/app/.appSetup/formSlice';
+import { DestinationData, FormData } from '@/types/formData';
 
 const TripPlan = () => {
-	const [formData, setFormData] = useState<FormData>({ destination: '' });
 	const router = useRouter();
-
-	const handleTextChange = (key: string, text: string) => {
-		setFormData((prev) => {
-			return { ...prev, [key]: text };
-		});
-	};
+	const { mapDate } = useContext(MapDateContext);
+	const dispatch = useDispatch();
+	const formData = useSelector(
+		(state: { formData: { value: FormData } }) => state.formData.value
+	);
 
 	const checkDate = () => {
-		if (!formData.startDate || !formData.endDate) return;
+		if (!mapDate.startDate || !mapDate.endDate) return;
+		const tag = `${mapDate.city}-${mapDate.startDate}`;
+		const convertObject: DestinationData = {
+			city: mapDate.city,
+			country: mapDate.country,
+			startDate: mapDate.startDate,
+			endDate: mapDate.endDate,
+		};
+		dispatch(updateFormData({ ...formData, [tag]: convertObject }));
+		console.log(formData);
+		router.back();
 	};
 	return (
 		<KeyboardAvoidingView>
 			<PageWrapperSpace>
-				<CalendarPlan setFormData={setFormData} />
+				<CalendarPlan />
 				<ButtonWrapper>
 					<Button
 						onPress={() => {
-							checkDate(), router.back();
+							checkDate();
 						}}
 						title={'Add destination'}
 						variant={'primary'}
