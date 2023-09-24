@@ -1,5 +1,5 @@
 import { PageWrapper } from '@/components/common/PageWrapper';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { KeyboardAvoidingView } from 'react-native';
 import pin from '../../../assets/images/pin.png';
 import MapView, { Marker } from 'react-native-maps';
@@ -7,31 +7,26 @@ import { ButtonWrapper } from './Map.styled';
 import Button from '@/components/common/button/Button';
 import AutoComplete, { Region } from '@/components/autoComplete/AutoComplete';
 import { useRouter } from 'expo-router';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateFormData } from '@/app/.appSetup/formSlice';
-import { FormData } from '@/types/formData';
+import { MapDateContext } from '@/app/.appSetup/context';
+import { useSelector } from 'react-redux';
 
 const Map = () => {
 	const [region, setRegion] = useState<Region>();
-	const dispatch = useDispatch();
-	const router = useRouter();
+	const { mapDate } = useContext(MapDateContext);
 	const formData = useSelector(
 		(state: { formData: { value: FormData } }) => state.formData.value
 	);
-	const [journeyData, setJourneyData] = useState<FormData>(formData);
+	const router = useRouter();
 
-	const handleNext = () => {
-		dispatch(updateFormData({ ...formData, journeyData }));
-		router.push('/tripFlow/activities/Activities');
+	const handleCalendarView = () => {
+		if (mapDate.city) router.push('/tripFlow/tripPlan/TripPlan');
+		console.log('Please select a destination');
 	};
 
-	// TODO: Implement calendar logic
-	// const handleCalendarView = () => {
-	// 	if (region) setJourneyData((prev) => {
-	// 		prev[`${region.city}`] = {
-	// 		}
-	// 	})
-	// };
+	const handleNext = () => {
+		console.log(formData);
+		router.push('/tripFlow/activities/Activities');
+	};
 
 	return (
 		<KeyboardAvoidingView>
@@ -82,7 +77,7 @@ const Map = () => {
 				<AutoComplete setState={setRegion} />
 				<ButtonWrapper>
 					<Button
-						onPress={() => router.push('/tripFlow/tripPlan/TripPlan')}
+						onPress={() => handleCalendarView()}
 						title={'Select dates'}
 						variant={'primary'}
 					/>

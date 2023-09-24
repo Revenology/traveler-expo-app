@@ -6,13 +6,14 @@ import {
 } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Keyboard, useColorScheme } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native';
 import store from './.appSetup/store';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { Provider } from 'react-redux';
+import { MapDate, MapDateContext } from './.appSetup/context';
 import { AutocompleteDropdownContextProvider } from 'react-native-autocomplete-dropdown';
 export {
 	// Catch any errors thrown by the Layout component.
@@ -27,7 +28,7 @@ export const unstable_settings = {
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-const DismissKeyboard = ({ children }: any) => (
+const DismissKeyboard = ({ children }: { children: React.ReactNode }) => (
 	<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
 		{children}
 	</TouchableWithoutFeedback>
@@ -60,63 +61,71 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
 	const colorScheme = useColorScheme();
+	const [mapDateContext, setMapDateContext] = useState<MapDate>({});
 
 	return (
 		<AutocompleteDropdownContextProvider>
-			<Provider store={store}>
-				<QueryClientProvider client={queryClient}>
-					<ThemeProvider
-						value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-					>
-						<DismissKeyboard>
-							<Stack initialRouteName="landing/Landing">
-								<Stack.Screen
-									name="landing/Landing"
-									options={{ headerShown: false, title: 'home' }}
-								/>
-								<Stack.Screen
-									name="login/Login"
-									options={{ presentation: 'modal', headerShown: false }}
-								/>
-								<Stack.Screen
-									name="signup/Signup"
-									options={{ presentation: 'modal', headerShown: false }}
-								/>
-								<Stack.Screen
-									name="tripFlow/tripPlan/TripPlan"
-									options={{
-										presentation: 'modal',
-										headerShown: false,
-									}}
-								/>
-								<Stack.Screen
-									name="tripFlow/map/Map"
-									options={{
-										headerShown: false,
-									}}
-								/>
-								<Stack.Screen
-									name="tripFlow/activities/Activities"
-									options={{
-										headerShown: false,
-									}}
-								/>
-								<Stack.Screen
-									name="tripFlow/collaborate/Collaborate"
-									options={{
-										headerShown: false,
-									}}
-								/>
-								<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-								<Stack.Screen
-									name="modal"
-									options={{ presentation: 'modal' }}
-								/>
-							</Stack>
-						</DismissKeyboard>
-					</ThemeProvider>
-				</QueryClientProvider>
-			</Provider>
+			<MapDateContext.Provider
+				value={{ mapDate: mapDateContext, setMapDate: setMapDateContext }}
+			>
+				<Provider store={store}>
+					<QueryClientProvider client={queryClient}>
+						<ThemeProvider
+							value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+						>
+							<DismissKeyboard>
+								<Stack initialRouteName="landing/Landing">
+									<Stack.Screen
+										name="landing/Landing"
+										options={{ headerShown: false, title: 'home' }}
+									/>
+									<Stack.Screen
+										name="login/Login"
+										options={{ presentation: 'modal', headerShown: false }}
+									/>
+									<Stack.Screen
+										name="signup/Signup"
+										options={{ presentation: 'modal', headerShown: false }}
+									/>
+									<Stack.Screen
+										name="tripFlow/tripPlan/TripPlan"
+										options={{
+											presentation: 'modal',
+											headerShown: false,
+										}}
+									/>
+									<Stack.Screen
+										name="tripFlow/map/Map"
+										options={{
+											headerShown: false,
+										}}
+									/>
+									<Stack.Screen
+										name="tripFlow/activities/Activities"
+										options={{
+											headerShown: false,
+										}}
+									/>
+									<Stack.Screen
+										name="tripFlow/collaborate/Collaborate"
+										options={{
+											headerShown: false,
+										}}
+									/>
+									<Stack.Screen
+										name="(tabs)"
+										options={{ headerShown: false }}
+									/>
+									<Stack.Screen
+										name="modal"
+										options={{ presentation: 'modal' }}
+									/>
+								</Stack>
+							</DismissKeyboard>
+						</ThemeProvider>
+					</QueryClientProvider>
+				</Provider>
+			</MapDateContext.Provider>
 		</AutocompleteDropdownContextProvider>
 	);
 }

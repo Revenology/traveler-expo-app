@@ -4,7 +4,7 @@ import { DestinationData, FormData } from '@/types/formData';
 const initialState: FormData = {};
 
 const formSlice = createSlice({
-	name: 'FormData',
+	name: 'formData',
 	initialState: {
 		value: initialState,
 	},
