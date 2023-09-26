@@ -16,7 +16,7 @@ const ActivityList = ({
 		<PillWrapper>
 			{listType == 'activities'
 				? activities
-					.filter((key) => !items.activities.includes(key))
+					.filter((key) => !items.activities?.includes(key))
 					.map((item) => {
 						return (
 							<TouchableOpacity
@@ -33,7 +33,7 @@ const ActivityList = ({
 					})
 				: listType == 'cuisine'
 					? cuisines
-						.filter((key) => !items.cuisine.includes(key))
+						.filter((key) => !items.cuisine?.includes(key))
 						.map((item) => {
 							return (
 								<TouchableOpacity
@@ -49,7 +49,7 @@ const ActivityList = ({
 							);
 						})
 					: accommodationTypes
-						.filter((key) => !items.accomomodation.includes(key))
+						.filter((key) => !items.accomomodation?.includes(key))
 						.map((item) => {
 							return (
 								<TouchableOpacity
