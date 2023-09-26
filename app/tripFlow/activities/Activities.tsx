@@ -1,7 +1,7 @@
 import { PageWrapper } from '@/components/common/PageWrapper';
 import Button from '@/components/common/button/Button';
 import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
 	BodyWrapper,
@@ -14,32 +14,38 @@ import {
 } from './Activities.styled';
 import JourneyCard from '@/components/common/journeyCard/JourneyCard';
 import { DestinationData, FormData } from '@/types/formData';
-import { View } from '@/components/Themed';
 import { Title } from '@/components/common/Title';
 import ActivityPill from '@/components/common/activityPill/ActivityPill';
-
-const mockList = ['Adventure', 'Hangout', 'Local eats', 'Budget', 'Swimming'];
-
-const getRandomHexColor = (): string => {
-	// Generate a random number between 0 and 16777215 (2^24 - 1)
-	const randomColor = Math.floor(Math.random() * 16777215);
-
-	// Convert the number to a hexadecimal string and pad it to 6 digits
-	const hexColor = randomColor.toString(16).padStart(6, '0');
-
-	// Return the hexadecimal color code with a '#' prefix
-	return `#${hexColor}`;
-};
-
-// Example usage:
-const randomColor = getRandomHexColor();
-console.log(randomColor);
+import AddButton from '@/components/common/addButton/AddButton';
+import ActivityList from './ActivityList';
+import { Text } from '@/components/Themed';
 
 const Activities = () => {
 	const router = useRouter();
 	const formData = useSelector(
 		(state: { formData: { value: FormData } }) => state.formData.value
 	);
+	const [showPills, setShowPills] = useState(true);
+	const [listType, setListType] = useState('activities');
+	const [items, setItems] = useState({
+		activities: [],
+		cuisine: [],
+		accomomodation: [],
+	});
+
+	const handlePress = (pillType: string) => {
+		setListType(pillType);
+		setShowPills(!showPills);
+	};
+
+	const addTypesToList = (category: string, value: string) => {
+		setItems((prev) => {
+			const temp = prev[category];
+			console.log(temp);
+			temp.push(value);
+			return { ...prev, [category]: temp };
+		});
+	};
 
 	return (
 		<PageWrapper>
@@ -59,57 +65,69 @@ const Activities = () => {
 				</JourneyWrapper>
 			</ScrollViewWrapper>
 			<BodyWrapper>
-				<TitleWrapper>
-					<SecondaryTitle>Activities</SecondaryTitle>
-					<PillWrapper>
-						{mockList.map((item) => {
-							const pillColor = getRandomHexColor();
-							const circleColor = getRandomHexColor();
-							return (
-								<ActivityPill
-									key={item}
-									title={item}
-									color={pillColor}
-									circleColor={circleColor}
-								/>
-							);
-						})}
-					</PillWrapper>
-				</TitleWrapper>
-				<TitleWrapper>
-					<SecondaryTitle>Food</SecondaryTitle>
-					<PillWrapper>
-						{mockList.map((item) => {
-							const pillColor = getRandomHexColor();
-							const circleColor = getRandomHexColor();
-							return (
-								<ActivityPill
-									key={item}
-									title={item}
-									color={pillColor}
-									circleColor={circleColor}
-								/>
-							);
-						})}
-					</PillWrapper>
-				</TitleWrapper>
-				<TitleWrapper>
-					<SecondaryTitle>Accommodation</SecondaryTitle>
-					<PillWrapper>
-						{mockList.map((item) => {
-							const pillColor = getRandomHexColor();
-							const circleColor = getRandomHexColor();
-							return (
-								<ActivityPill
-									key={item}
-									title={item}
-									color={pillColor}
-									circleColor={circleColor}
-								/>
-							);
-						})}
-					</PillWrapper>
-				</TitleWrapper>
+				{showPills && (
+					<>
+						<TitleWrapper>
+							<SecondaryTitle>Activities</SecondaryTitle>
+							<PillWrapper>
+								{items.activities?.map((item) => {
+									return (
+										<ActivityPill
+											key={item}
+											title={item}
+											color="gray"
+											circleColor="black"
+										/>
+									);
+								})}
+								<AddButton onPress={() => handlePress('activities')} />
+							</PillWrapper>
+						</TitleWrapper>
+						<TitleWrapper>
+							<SecondaryTitle>Cuisine</SecondaryTitle>
+							<PillWrapper>
+								{items.cuisine?.map((item) => {
+									return (
+										<ActivityPill
+											key={item}
+											title={item}
+											color="gray"
+											circleColor="black"
+										/>
+									);
+								})}
+								<AddButton onPress={() => handlePress('cuisine')} />
+							</PillWrapper>
+						</TitleWrapper>
+						<TitleWrapper>
+							<SecondaryTitle>Accommodation</SecondaryTitle>
+							<PillWrapper>
+								{items.accomomodation?.map((item) => {
+									return (
+										<ActivityPill
+											key={item}
+											title={item}
+											color="gray"
+											circleColor="black"
+										/>
+									);
+								})}
+								<AddButton onPress={() => handlePress('accomomodation')} />
+							</PillWrapper>
+						</TitleWrapper>
+					</>
+				)}
+				{!showPills && (
+					<>
+						<SecondaryTitle>Add {listType}</SecondaryTitle>
+						<ActivityList
+							listType={listType}
+							onPress={addTypesToList}
+							items={items}
+						/>
+						<AddButton onPress={() => setShowPills(!showPills)} />
+					</>
+				)}
 			</BodyWrapper>
 			<ButtonWrapper>
 				<Button
