@@ -2,7 +2,7 @@ import { PageWrapper } from '@/components/common/PageWrapper';
 import Button from '@/components/common/button/Button';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	BodyWrapper,
 	ButtonWrapper,
@@ -19,6 +19,7 @@ import ActivityPill from '@/components/common/activityPill/ActivityPill';
 import AddButton from '@/components/common/addButton/AddButton';
 import ActivityList from './ActivityList';
 import { Text } from '@/components/Themed';
+import { updateFormData } from '@/app/.appSetup/formSlice';
 
 const Activities = () => {
 	const router = useRouter();
@@ -26,6 +27,7 @@ const Activities = () => {
 		(state: { formData: { value: FormData } }) => state.formData.value
 	);
 	const [activeLeg, setActiveLeg] = useState(Object.keys(formData)[0]);
+	const dispatch = useDispatch();
 	const [showPills, setShowPills] = useState(true);
 	const [listType, setListType] = useState('activities');
 	const [items, setItems] = useState({
@@ -40,15 +42,19 @@ const Activities = () => {
 	};
 
 	const addTypesToList = (category: string, value: string) => {
-		setItems((prev) => {
-			const temp = prev[category];
-			console.log(temp);
-			temp.push(value);
-			return { ...prev, [category]: temp };
-		});
+		dispatch(
+			updateFormData({
+				...formData,
+				[activeLeg]: {
+					...formData[activeLeg],
+					[category]: formData[activeLeg][category]
+						? [...formData[activeLeg][category], value]
+						: [value],
+				},
+			})
+		);
+		console.log(formData);
 	};
-
-	const handleLocation = (locationKey: string) => {};
 
 	return (
 		<PageWrapper>
@@ -76,7 +82,7 @@ const Activities = () => {
 						<TitleWrapper>
 							<SecondaryTitle>Activities</SecondaryTitle>
 							<PillWrapper>
-								{items.activities?.map((item) => {
+								{formData[activeLeg].activities?.map((item) => {
 									return (
 										<ActivityPill
 											key={item}
@@ -92,7 +98,7 @@ const Activities = () => {
 						<TitleWrapper>
 							<SecondaryTitle>Cuisine</SecondaryTitle>
 							<PillWrapper>
-								{items.cuisine?.map((item) => {
+								{formData[activeLeg].cuisine?.map((item) => {
 									return (
 										<ActivityPill
 											key={item}
@@ -108,7 +114,7 @@ const Activities = () => {
 						<TitleWrapper>
 							<SecondaryTitle>Accommodation</SecondaryTitle>
 							<PillWrapper>
-								{items.accomomodation?.map((item) => {
+								{formData[activeLeg].accommodation?.map((item) => {
 									return (
 										<ActivityPill
 											key={item}
@@ -129,7 +135,7 @@ const Activities = () => {
 						<ActivityList
 							listType={listType}
 							onPress={addTypesToList}
-							items={items}
+							items={formData[activeLeg]}
 						/>
 						<AddButton onPress={() => setShowPills(!showPills)} />
 					</>

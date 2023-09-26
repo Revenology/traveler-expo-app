@@ -8,9 +8,9 @@ export interface DestinationData {
 	startDate?: string;
 	endDate?: string;
 	duration?: string;
-	activies?: string[];
-	food?: string[];
-	accomodation?: string[];
+	activities?: string[];
+	cuisine?: string[];
+	accommodation?: string[];
 	travelers?: UserData[];
 }
 
