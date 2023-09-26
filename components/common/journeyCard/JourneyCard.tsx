@@ -24,23 +24,39 @@ const countDays = (startDate: Date, endDate: Date): number => {
 	return daysDifference;
 };
 
-const JourneyCard = ({ journey }: { journey: DestinationData }) => {
+const JourneyCard = ({
+	journey,
+	isActive,
+	onPress,
+}: {
+	journey: DestinationData;
+	isActive: boolean;
+	onPress: any;
+}) => {
 	const dayCount =
 		journey.startDate && journey.endDate
 			? countDays(new Date(journey.startDate), new Date(journey.endDate))
 			: 0;
 
 	return (
-		<CardWrapper>
-			<Wrapper>
-				<WeightText $weight={500}>{journey.city}</WeightText>
-				<WeightText $weight={200}>{journey.country}</WeightText>
+		<CardWrapper $isActive={isActive} onPress={onPress}>
+			<Wrapper $isActive={isActive}>
+				<WeightText $weight={500} $isActive={isActive}>
+					{journey.city}
+				</WeightText>
+				<WeightText $weight={200} $isActive={isActive}>
+					{journey.country}
+				</WeightText>
 			</Wrapper>
-			<InlineWrapper>
-				<WeightText $weight={800}>{dayCount}</WeightText>
-				<WeightText $weight={500}>Days</WeightText>
+			<InlineWrapper $isActive={isActive}>
+				<WeightText $weight={800} $isActive={isActive}>
+					{dayCount}
+				</WeightText>
+				<WeightText $weight={500} $isActive={isActive}>
+					Days
+				</WeightText>
 			</InlineWrapper>
-			<WeightText>{`${
+			<WeightText $isActive={isActive}>{`${
 				journey.startDate ? formatDate(journey.startDate) : 0
 			} - ${journey.endDate ? formatDate(journey.endDate) : 0}`}</WeightText>
 		</CardWrapper>

@@ -25,6 +25,7 @@ const Activities = () => {
 	const formData = useSelector(
 		(state: { formData: { value: FormData } }) => state.formData.value
 	);
+	const [activeLeg, setActiveLeg] = useState(Object.keys(formData)[0]);
 	const [showPills, setShowPills] = useState(true);
 	const [listType, setListType] = useState('activities');
 	const [items, setItems] = useState({
@@ -47,6 +48,8 @@ const Activities = () => {
 		});
 	};
 
+	const handleLocation = (locationKey: string) => {};
+
 	return (
 		<PageWrapper>
 			<TitleWrapper>
@@ -54,11 +57,14 @@ const Activities = () => {
 			</TitleWrapper>
 			<ScrollViewWrapper>
 				<JourneyWrapper horizontal={true}>
-					{Object.values(formData).map((journey: DestinationData) => {
+					{Object.entries(formData).map((item) => {
+						const [key, value] = item;
 						return (
 							<JourneyCard
-								key={`${journey.city}-${journey.startDate}`}
-								journey={journey}
+								key={`${value.city}-${value.startDate}`}
+								journey={value}
+								isActive={activeLeg == key}
+								onPress={() => setActiveLeg(key)}
 							/>
 						);
 					})}
