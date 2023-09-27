@@ -9,10 +9,14 @@ import AutoComplete, { Region } from '@/components/autoComplete/AutoComplete';
 import { useRouter } from 'expo-router';
 import { MapDateContext } from '@/app/.appSetup/context';
 import { useSelector } from 'react-redux';
+import { ICity } from 'country-state-city';
+import LetsNavigator from '@/components/common/navigator/LetsNavigator';
+import { Text } from '@/components/Themed';
 
 const Map = () => {
-	const [region, setRegion] = useState<Region>();
+	const [region, setRegion] = useState<ICity>();
 	const { mapDate } = useContext(MapDateContext);
+	const [badMapDate, setBadMapDate] = useState(false);
 	const formData = useSelector(
 		(state: { formData: { value: FormData } }) => state.formData.value
 	);
@@ -24,6 +28,10 @@ const Map = () => {
 	};
 
 	const handleNext = () => {
+		if (!mapDate.city || !mapDate.endDate) {
+			setBadMapDate(true);
+			return;
+		}
 		console.log(formData);
 		router.push('/tripFlow/activities/Activities');
 	};
@@ -41,10 +49,10 @@ const Map = () => {
 					region={
 						region
 							? {
-								latitude: region.lat,
-								longitude: region.long,
-								latitudeDelta: 1,
-								longitudeDelta: 1,
+								latitude: Number(region?.latitude),
+								longitude: Number(region?.longitude),
+								latitudeDelta: 0.5,
+								longitudeDelta: 0.5,
 							  }
 							: {
 								latitude: 37.78825,
@@ -75,24 +83,20 @@ const Map = () => {
 					/>
 				</MapView>
 				<AutoComplete setState={setRegion} />
+				{badMapDate && (!mapDate.city || !mapDate.endDate) && (
+					<Text>Please select a location and dates</Text>
+				)}
 				<ButtonWrapper>
 					<Button
 						onPress={() => handleCalendarView()}
 						title={'Select dates'}
 						variant={'primary'}
 					/>
-					<Button
-						onPress={() => {
-							handleNext();
-						}}
-						title="Next"
-						variant="secondary"
-					/>
-
-					<Button
-						onPress={() => router.back()}
-						title={'Cancel'}
-						variant={'secondary'}
+					<LetsNavigator
+						back={() => router.back()}
+						forward={() => handleNext()}
+						backText={'Cancel'}
+						forwardText={'Next'}
 					/>
 				</ButtonWrapper>
 			</PageWrapper>

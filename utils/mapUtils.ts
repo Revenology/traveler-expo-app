@@ -1,5 +1,6 @@
 import cities from 'cities.json';
 import { countries } from 'countries-list';
+import { City, ICity } from 'country-state-city';
 
 interface city {
 	country: string;
@@ -32,4 +33,10 @@ const doAsyncTask = (searchString: string, signal: AbortSignal) => {
 
 export const findCityList = (searchString: string) => {
 	return cities.filter((item) => item.name.includes(searchString));
+};
+
+export const getCity = (searchString: string): ICity[] => {
+	return City.getAllCities()
+		.filter((item) => item.name.startsWith(searchString))
+		.slice(0, 5);
 };

@@ -1,12 +1,17 @@
 import React, { useContext, useState } from 'react';
-import { FlatList } from 'react-native';
 import Input from '../common/textinput/Input';
 import {
+	IconImage,
 	ScreenWrapper,
+	StyledList,
 	StyledPressable,
 	StyledText,
 } from './AutoComplete.styled';
 import { MapDateContext } from '@/app/.appSetup/context';
+import { getCity } from '@/utils/mapUtils';
+import { ICity } from 'country-state-city';
+import { Image } from 'react-native';
+import location from '../../assets/images/location.png';
 
 export interface Region {
 	country: string;
@@ -15,62 +20,52 @@ export interface Region {
 	long: number;
 }
 
-const dataFaker: Region[] = [
-	{ country: 'Australia', city: 'Sydney', lat: -33.8688, long: 151.2093 },
-	{
-		country: 'New Zealand',
-		city: 'Auckland',
-		lat: -36.8509,
-		long: 174.7645,
-	},
-	{
-		country: 'Japan',
-		city: 'Tokyo',
-		lat: 35.6762,
-		long: 139.6503,
-	},
-];
-
 const AutoComplete = ({
 	setState,
 }: {
-	setState: React.Dispatch<React.SetStateAction<Region | undefined>>;
+	setState: React.Dispatch<React.SetStateAction<ICity | undefined>>;
 }) => {
 	const [text, setText] = useState('');
-	const [data, setData] = useState(dataFaker);
+	const [data, setData] = useState<ICity[]>([]);
 	const [dropVis, setDropVis] = useState(false);
 	const { setMapDate } = useContext(MapDateContext);
 
-	const onPress = (item: Region) => {
+	const onPress = (item: ICity) => {
 		setState(item);
 		setMapDate((prev) => {
-			prev.city = item.city;
-			prev.country = item.country;
-			console.log('This is the updated value: ', prev);
+			prev.city = item.name;
+			prev.country = item.countryCode;
 			return prev;
 		});
-		console.log(item);
 	};
 	const updateSearchList = (word: string) => {
 		setText(word);
-		setData(() => {
-			return dataFaker.filter(
-				(place) =>
-					place.city.toLowerCase().startsWith(word.toLowerCase()) ||
-					place.country.toLowerCase().startsWith(word.toLowerCase())
-			);
-		});
+		if (word.length < 4) return;
+		setData(getCity(word));
 	};
 
-	const ListItem = ({ country, city, lat, long }: Region) => (
+	const ListItem = ({
+		name,
+		countryCode,
+		latitude,
+		longitude,
+		stateCode,
+	}: ICity) => (
 		<StyledPressable
 			onPress={() => {
-				onPress({ country, city, lat, long }),
+				onPress({
+					countryCode,
+					name,
+					latitude,
+					longitude,
+					stateCode,
+				}),
 				setDropVis(false),
-				setText(`${city}, ${country}`);
+				setText(`${name}, ${countryCode}`);
 			}}
 		>
-			<StyledText>{`${city}, ${country}`}</StyledText>
+			<IconImage source={location} />
+			<StyledText>{`${name} ${stateCode}, ${countryCode}`}</StyledText>
 		</StyledPressable>
 	);
 
@@ -87,15 +82,16 @@ const AutoComplete = ({
 				onBlur={() => setDropVis(false)}
 			/>
 			{dropVis && (
-				<FlatList
+				<StyledList
 					data={data}
-					renderItem={({ item }: { item: Region }) => {
+					renderItem={({ item }: { item: ICity }) => {
 						return (
 							<ListItem
-								country={item.country}
-								city={item.city}
-								lat={item.lat}
-								long={item.long}
+								countryCode={item.countryCode}
+								name={item.name}
+								latitude={item.latitude}
+								longitude={item.longitude}
+								stateCode={item.stateCode}
 							/>
 						);
 					}}

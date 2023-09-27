@@ -124,7 +124,7 @@ const Activities = () => {
 										/>
 									);
 								})}
-								<AddButton onPress={() => handlePress('accomomodation')} />
+								<AddButton onPress={() => handlePress('accommodation')} />
 							</PillWrapper>
 						</TitleWrapper>
 					</>
