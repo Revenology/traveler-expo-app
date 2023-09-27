@@ -24,6 +24,7 @@
     "axios": "^1.4.0",
     "cities.json": "^1.1.24",
     "countries-list": "^2.6.1",
+    "country-state-city": "^3.2.1",
     "expo": "~49.0.6",
     "expo-font": "~11.4.0",
     "expo-linking": "~5.0.2",

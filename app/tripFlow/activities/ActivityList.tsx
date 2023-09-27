@@ -49,7 +49,7 @@ const ActivityList = ({
 							);
 						})
 					: accommodationTypes
-						.filter((key) => !items.accomomodation?.includes(key))
+						.filter((key) => !items.accommodation?.includes(key))
 						.map((item) => {
 							return (
 								<TouchableOpacity

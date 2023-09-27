@@ -22,6 +22,10 @@ export const createBody = (tripData: JSON): ChatCompletionCreateParams => {
 				role: 'system',
 				content: 'You are a virtual assistant responsible for creating plans',
 			},
+			{
+				role: 'system',
+				content: 'Return response in a json object that looks like xyz',
+			},
 			{ role: 'user', content: countryDataPrompt(tripData) },
 		],
 		max_tokens: 10,
