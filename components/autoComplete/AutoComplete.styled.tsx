@@ -7,7 +7,7 @@ export const ScreenWrapper = styled.View`
 	border-radius: 10px;
 	align-items: center;
 	position: absolute;
-	top: 75px;
+	top: 20px;
 	z-index: 3;
 `;
 

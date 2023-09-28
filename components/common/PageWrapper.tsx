@@ -14,3 +14,27 @@ export const PageWrapperSpace = styled(View)`
 	align-items: center;
 	justify-content: space-around;
 `;
+
+export const HeaderWrapper = styled(View)`
+	padding-top: 40px;
+	height: 15%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
+export const FooterWrapper = styled(View)`
+	height: 15%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
+
+export const BodyWrapper = styled(View)`
+	height: 70%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;

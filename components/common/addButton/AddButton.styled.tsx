@@ -5,8 +5,8 @@ import styled from 'styled-components';
 export const StyledAddButton = styled(TouchableOpacity)`
 	height: 30px;
 	width: 30px;
-	border-radius: 10px;
-	background-color: red;
+	border-radius: 12px;
+	background-color: #1b1d20;
 	display: flex;
 	align-items: center;
 	justify-content: center;

@@ -1,21 +1,38 @@
 import React from 'react';
-import {
-	BackButton,
-	BackText,
-	ForwardButton,
-	ForwardText,
-	NavigatorWrapper,
-} from './LetsNavigator.styled';
+import { NavigatorWrapper } from './LetsNavigator.styled';
+import Button from '../button/Button';
 
-const LetsNavigator = ({ back, forward, backText, forwardText }: any) => {
+interface ForwardProps {
+	color?: string;
+	border?: string;
+	variant?: string;
+}
+
+const LetsNavigator = ({
+	back,
+	forward,
+	backText,
+	forwardText,
+	forwardProps,
+}: any) => {
 	return (
 		<NavigatorWrapper>
-			<BackButton onPress={() => back()}>
-				<BackText>{backText}</BackText>
-			</BackButton>
-			<ForwardButton onPress={() => forward()}>
-				<ForwardText>{forwardText}</ForwardText>
-			</ForwardButton>
+			<Button
+				onPress={() => back()}
+				title={backText}
+				variant={'white'}
+				width={'49%'}
+				color={'#1A1D21'}
+				border={'1px solid #1A1D21'}
+			/>
+			<Button
+				onPress={() => forward()}
+				title={forwardText}
+				variant={forwardProps?.variant ?? '#1A1D21'}
+				color={forwardProps?.color ?? 'white'}
+				border={forwardProps?.border ?? 'none'}
+				width={'49%'}
+			/>
 		</NavigatorWrapper>
 	);
 };

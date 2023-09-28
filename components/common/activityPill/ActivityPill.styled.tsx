@@ -9,7 +9,9 @@ export const PillContainer = styled(TouchableOpacity)<{ $color: string }>`
 	align-items: center;
 	gap: 5px;
 	padding: 5px;
-	width: 100px;
+	width: auto;
+	padding-left: 10px;
+	padding-right: 10px;
 	background-color: ${(props) => (props.$color ? props.$color : 'gray')};
 	border-radius: 15px;
 	height: 30px;
@@ -22,6 +24,6 @@ export const Circle = styled(View)<{ $color: string }>`
 	background-color: ${(props) => (props.$color ? props.$color : 'white')};
 `;
 
-export const ColorText = styled(Text)`
-	color: white;
+export const ColorText = styled(Text)<{ $textColor: string }>`
+	color: ${(props) => props.$textColor ?? 'white'};
 `;
