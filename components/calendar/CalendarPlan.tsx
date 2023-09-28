@@ -1,6 +1,7 @@
 import { MapDateContext } from '@/app/.appSetup/context';
 import React, { useContext, useState } from 'react';
 import { Calendar } from 'react-native-calendars';
+import { useSelector } from 'react-redux';
 
 interface DayProps {
 	dateString: string;
@@ -11,16 +12,22 @@ interface DayProps {
 }
 interface TempData {
 	[key: string]: {
-		[key: string]: string;
+		[key: string]: string | boolean;
 	};
 }
 
 const CalendarPlan = () => {
 	//TODO: Extrat datatype of Calendar
+
+	const { setMapDate } = useContext(MapDateContext);
 	const [dateData, setDateData] = useState<{
 		[key: string]: { [key: string]: unknown };
 	}>({});
-	const { setMapDate } = useContext(MapDateContext);
+	const formData = useSelector(
+		(state: {
+			formData: { value: { startDate: string; endDate: string }[] };
+		}) => state.formData.value
+	);
 
 	const getDatesBetween = (startDate: string, endDate: string): string[] => {
 		const betweenArray: string[] = [];
@@ -35,6 +42,27 @@ const CalendarPlan = () => {
 
 		return betweenArray;
 	};
+
+	const previousDateData: TempData = {};
+	Object.values(formData).forEach(({ startDate, endDate }) => {
+		const datesBetween = getDatesBetween(startDate, endDate);
+		for (const date of datesBetween) {
+			previousDateData[date] = { color: 'gray', textColor: 'black' };
+		}
+
+		previousDateData[startDate] = {
+			endingDay: false,
+			startingDay: true,
+			color: 'gray',
+			textColor: 'black',
+		};
+
+		previousDateData[endDate] = {
+			endingDay: true,
+			color: 'gray',
+			textColor: 'black',
+		};
+	});
 
 	const handleDateSelection = ({ dateString }: DayProps) => {
 		const keys: string[] = Object.keys(dateData);
@@ -89,7 +117,7 @@ const CalendarPlan = () => {
 		<>
 			<Calendar
 				markingType={'period'}
-				markedDates={dateData}
+				markedDates={{ ...previousDateData, ...dateData }}
 				style={{ width: 350 }}
 				onDayPress={(day) => {
 					handleDateSelection(day);

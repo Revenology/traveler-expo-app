@@ -7,7 +7,7 @@ import {
 	PageWrapperSpace,
 } from '@/components/common/PageWrapper';
 import Button from '@/components/common/button/Button';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { KeyboardAvoidingView } from 'react-native';
 import { ButtonWrapper } from './TripPlan.styled';
 import { useRouter } from 'expo-router';
@@ -16,16 +16,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateFormData } from '@/app/.appSetup/formSlice';
 import { DestinationData, FormData } from '@/types/formData';
 import { Title } from '@/components/common/Title';
-import { View } from '@/components/Themed';
+import { Text, View } from '@/components/Themed';
 import LetsNavigator from '@/components/common/navigator/LetsNavigator';
+import { JourneyWrapper } from '../activities/Activities.styled';
+import JourneyCard from '@/components/common/journeyCard/JourneyCard';
 
 const TripPlan = () => {
 	const router = useRouter();
 	const { mapDate } = useContext(MapDateContext);
+
 	const dispatch = useDispatch();
 	const formData = useSelector(
 		(state: { formData: { value: FormData } }) => state.formData.value
 	);
+	const [activeLeg, setActiveLeg] = useState(Object.keys(formData)[0]);
 
 	const checkDate = () => {
 		if (!mapDate.startDate || !mapDate.endDate) return;
@@ -37,7 +41,6 @@ const TripPlan = () => {
 			endDate: mapDate.endDate,
 		};
 		dispatch(updateFormData({ ...formData, [tag]: convertObject }));
-		console.log(formData);
 		router.back();
 	};
 	return (
@@ -45,9 +48,23 @@ const TripPlan = () => {
 			<KeyboardAvoidingView>
 				<PageWrapper>
 					<HeaderWrapper>
-						<Title>Dates</Title>
+						<Title>When is your trip?</Title>
 					</HeaderWrapper>
 					<BodyWrapper>
+						<JourneyWrapper horizontal={true}>
+							{Object.entries(formData).map((item) => {
+								const [key, value] = item;
+								return (
+									<JourneyCard
+										key={`${value.city}-${value.startDate}`}
+										journey={value}
+										isActive={activeLeg == key}
+										onPress={() => setActiveLeg(key)}
+									/>
+								);
+							})}
+						</JourneyWrapper>
+						<Text>Current Trips</Text>
 						<CalendarPlan />
 					</BodyWrapper>
 					<FooterWrapper>
