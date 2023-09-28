@@ -45,7 +45,7 @@ const Map = () => {
 		<KeyboardAvoidingView>
 			<PageWrapper>
 				<HeaderWrapper>
-					<Title>Destination</Title>
+					<Title>Where to?</Title>
 				</HeaderWrapper>
 				<BodyWrapper>
 					<MapView

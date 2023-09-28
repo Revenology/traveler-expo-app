@@ -18,9 +18,9 @@ export const PageWrapperSpace = styled(View)`
 export const HeaderWrapper = styled(View)`
 	padding-top: 40px;
 	height: 15%;
-	width: 100%;
+	width: 90%;
 	display: flex;
-	align-items: center;
+	align-items: start;
 	justify-content: center;
 `;
 export const FooterWrapper = styled(View)`

@@ -5,6 +5,7 @@ import {
 	HeaderWrapper,
 	PageWrapper,
 } from '@/components/common/PageWrapper';
+import { Title } from '@/components/common/Title';
 import Button from '@/components/common/button/Button';
 import LetsNavigator from '@/components/common/navigator/LetsNavigator';
 import { useRouter } from 'expo-router';
@@ -15,7 +16,7 @@ const Collaborate = () => {
 	return (
 		<PageWrapper>
 			<HeaderWrapper>
-				<Text>I am collaborate</Text>
+				<Title>Who should go?</Title>
 			</HeaderWrapper>
 			<BodyWrapper></BodyWrapper>
 			<FooterWrapper>

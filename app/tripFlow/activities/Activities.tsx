@@ -61,7 +61,7 @@ const Activities = () => {
 	return (
 		<PageWrapper>
 			<HeaderWrapper>
-				<Title>Select location</Title>
+				<Title>What do you want to do?</Title>
 			</HeaderWrapper>
 			<BodyWrapper>
 				<ScrollViewWrapper>
