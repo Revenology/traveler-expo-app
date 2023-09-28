@@ -67,3 +67,46 @@ export const validateEmail = (email: string): boolean => {
 	}
 	return false;
 };
+
+const generateRandomColor = () => {
+	const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
+		Math.random() * 256
+	)}, ${Math.floor(Math.random() * 256)})`;
+	return randomColor;
+};
+
+const lightenColor = (baseColor: any, factor: any) => {
+	const rgb = baseColor.match(/\d+/g);
+	const r = parseInt(rgb[0]);
+	const g = parseInt(rgb[1]);
+	const b = parseInt(rgb[2]);
+
+	const newR = Math.min(255, r + factor);
+	const newG = Math.min(255, g + factor);
+	const newB = Math.min(255, b + factor);
+
+	return `rgb(${newR}, ${newG}, ${newB})`;
+};
+
+const calculateTextColor = (background) => {
+	// Parse the background color to extract RGB components
+	const rgb = background.match(/\d+/g);
+	const r = parseInt(rgb[0]);
+	const g = parseInt(rgb[1]);
+	const b = parseInt(rgb[2]);
+
+	// Calculate the brightness of the background color
+	const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+	// Determine the text color based on brightness
+	return brightness > 128 ? 'black' : 'white';
+};
+
+export const generateRandomColorsWithContrast = () => {
+	const baseColor = generateRandomColor();
+
+	const lightColor = lightenColor(baseColor, 40);
+	const textColor = calculateTextColor(lightColor);
+
+	return [lightColor, baseColor, textColor];
+};

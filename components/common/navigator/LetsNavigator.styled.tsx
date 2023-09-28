@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native';
 export const NavigatorWrapper = styled(View)`
 	display: flex;
 	flex-direction: row;
-	width: 90%;
+	width: 80%;
 	justify-content: space-between;
 	align-items: center;
 `;

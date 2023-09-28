@@ -6,15 +6,17 @@ const ActivityPill = ({
 	title,
 	color,
 	circleColor,
+	textColor,
 }: {
 	title: string;
 	color: string;
 	circleColor: string;
+	textColor?: string;
 }) => {
 	return (
 		<PillContainer $color={color}>
 			<Circle $color={circleColor} />
-			<ColorText>{title}</ColorText>
+			<ColorText $textColor={textColor}>{title}</ColorText>
 		</PillContainer>
 	);
 };

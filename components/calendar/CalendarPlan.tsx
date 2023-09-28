@@ -49,7 +49,7 @@ const CalendarPlan = () => {
 					startingDay: true,
 					endingDay: true,
 					marked: true,
-					color: 'red',
+					color: '#1A1D21',
 					textColor: 'white',
 				},
 			});
@@ -69,7 +69,7 @@ const CalendarPlan = () => {
 				const tempData: TempData = {};
 				const datesBetween = getDatesBetween(keys[0], dateString);
 				for (const date of datesBetween) {
-					tempData[date] = { color: 'red', textColor: 'white' };
+					tempData[date] = { color: '#1A1D21', textColor: 'white' };
 				}
 				const newPrev = { [keys[0]]: { ...prev[keys[0]], endingDay: false } };
 				return {
@@ -78,7 +78,7 @@ const CalendarPlan = () => {
 					[dateString]: {
 						endingDay: true,
 						marked: true,
-						color: 'red',
+						color: '#1A1D21',
 						textColor: 'white',
 					},
 				};

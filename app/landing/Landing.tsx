@@ -34,14 +34,16 @@ const Landing = () => {
 					}}
 				/>
 				<Button
-					variant="primary"
+					variant="#1A1D21"
 					title="Login"
 					onPress={() => {
 						router.push('/login/Login');
 					}}
 				/>
 				<Button
-					variant="secondary"
+					variant="white"
+					border="1px solid #1A1D21"
+					color="#1A1D21"
 					title="Sign up"
 					onPress={() => {
 						router.push('/signup/Signup');
