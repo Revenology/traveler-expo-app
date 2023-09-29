@@ -1,4 +1,9 @@
-import { PageWrapper } from '@/components/common/PageWrapper';
+import {
+	BodyWrapper,
+	FooterWrapper,
+	HeaderWrapper,
+	PageWrapper,
+} from '@/components/common/PageWrapper';
 import loginImage from '../../assets/blush/login.png';
 import Button from '@/components/common/button/Button';
 import Input from '@/components/common/textinput/Input';
@@ -14,6 +19,7 @@ import { Title } from '@/components/common/Title';
 import HeroImage from '@/components/common/heroImage/HeroImage';
 import { LoginProps } from '@/constants/types';
 import { userLogin } from '@/utils/user.util';
+import { InputWrapper } from '../signup/Signup.style';
 
 const Login = () => {
 	const [userData, setUserData] = useState<LoginProps>({
@@ -33,11 +39,11 @@ const Login = () => {
 	return (
 		<StyledWrapper behavior="position">
 			<PageWrapper>
-				<ComponentWrapper>
+				<HeaderWrapper>
 					<Title>Welcome back!</Title>
+				</HeaderWrapper>
+				<BodyWrapper>
 					<HeroImage sourceUrl={loginImage} />
-				</ComponentWrapper>
-				<LoginWrapper>
 					<AssistText>Login</AssistText>
 					<Input
 						onChangeText={(text) =>
@@ -59,6 +65,8 @@ const Login = () => {
 						value={userData.password}
 						placeholder="Password"
 					/>
+				</BodyWrapper>
+				<FooterWrapper>
 					<ButtonWrapper>
 						<Button
 							onPress={() => handleLogin()}
@@ -66,11 +74,7 @@ const Login = () => {
 							variant={'primary'}
 						/>
 					</ButtonWrapper>
-					{/* <StyledLink href={'/(tabs)/landing/Index'}>
-						Forgot your password?
-					</StyledLink> */}
-					{/* <StyledLink href={'/'}>Already have an account?</StyledLink> */}
-				</LoginWrapper>
+				</FooterWrapper>
 			</PageWrapper>
 		</StyledWrapper>
 	);

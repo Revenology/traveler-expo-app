@@ -13,6 +13,7 @@ export const ButtonWrapper = styled(View)`
 
 export const JourneyWrapper = styled(ScrollView)`
 	gap: 10px;
+	width: 100%;
 `;
 
 export const ScrollViewWrapper = styled(View)`
