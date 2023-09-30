@@ -4,15 +4,15 @@ import { DestinationData, FormData } from '@/types/formData';
 const initialState: FormData = {};
 
 const formSlice = createSlice({
-	name: 'formData',
-	initialState: {
-		value: initialState,
-	},
-	reducers: {
-		updateFormData: (state, action) => {
-			state.value = action.payload;
-		},
-	},
+  name: 'formData',
+  initialState: {
+    value: initialState,
+  },
+  reducers: {
+    updateFormData: (state, action) => {
+      state.value = action.payload;
+    },
+  },
 });
 
 export const { updateFormData } = formSlice.actions;

@@ -6,12 +6,15 @@ A mock service is to be implemented for running the frontend application by itse
 ## Setup
 
 Run the following commands.
+
 ```bash
 npm install
 ```
+
 ## Running app
 
 To run the application run one of the following command based on your platform:
+
 ```bash
 npm start
 
@@ -19,11 +22,13 @@ npm start
 
 yarn start
 ```
+
 Scan the QR code that renders in the CLI. Note that the browser implementation is currently broken.
 
 ## Running storybook
 
 To run the storybook web server run the following command.
+
 ```bash
 npm run story book
 ```
@@ -40,5 +45,5 @@ git checkout -b 'feature/feature_description'
 git checkout -b 'bugfix/bugfix_description'
 
 #Test
-git checkout -b 'test/test_name' 
+git checkout -b 'test/test_name'
 ```
