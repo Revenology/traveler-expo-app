@@ -19,3 +19,34 @@ export interface UserData {
 	lastName: string;
 	email: string;
 }
+
+export interface JourneyResponse {
+	//Location props
+	address: string;
+	city: string;
+	country: string;
+	date: string;
+
+	//Activity Parameters
+	timeRequiredInHours: string;
+	activityName: string;
+	description: string;
+}
+
+export interface AccommodationResponse {
+	name: string;
+	address: string;
+	city: string;
+	country: string;
+	startDate: string;
+	endDate: string;
+	amenities: string;
+}
+
+export interface TravelerJson {
+	//key is the accommodation and location
+	[key: string]: {
+		accommodation: AccommodationResponse[];
+		activities: JourneyResponse[];
+	};
+}
