@@ -1,10 +1,10 @@
 # traveler-expo-app
+![Traveler 001](https://github.com/Revenology/traveler-expo-app/assets/101493226/06e839b0-8532-4f0b-9101-99a9a0e7c0dc)
 
 Frontend repo for the traveler application. The backend is currently not hosted and you will need to run the [backend](https://github.com/Revenology/traveler) for the application to work correctly.
 A mock service is to be implemented for running the frontend application by itself.
 
 ## Setup
-
 Run the following commands.
 
 ```bash
